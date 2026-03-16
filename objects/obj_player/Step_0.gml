@@ -182,3 +182,8 @@ uparrow.visible = state != states.actor &&
 	place_meeting(x, y, obj_door))))
 
 player_sounds()
+
+if (sprite_index == spr_player_mach3)
+    image_speed = 0.4;
+else if (sprite_index == spr_player_mach1 || sprite_index == spr_player_mach2)
+    image_speed = abs(movespeed) / 15;

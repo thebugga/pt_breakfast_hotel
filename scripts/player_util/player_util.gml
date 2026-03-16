@@ -586,7 +586,8 @@ function asset_player_reset(_letter)
 	}
 	
 	loop_sounds = {
-		mach2: new make_loop_sound(states.normal, sfx_mach2, function() { return obj_player.sprite_index == obj_player.spr_player_mach1 && obj_player.character == characters.peppino;}),
+		mach1: new make_loop_sound(states.normal, sfx_mach2, function() { return obj_player.sprite_index == obj_player.spr_player_mach1 && obj_player.character == characters.peppino;}),
+		mach2: new make_loop_sound(states.normal, sfx_mach2, function() { return obj_player.sprite_index == obj_player.spr_player_mach2 && obj_player.character == characters.peppino;}),
 		mach3: new make_loop_sound(states.normal, sfx_mach3, function() { return obj_player.sprite_index == obj_player.spr_player_mach3 && obj_player.character == characters.peppino;}),
 		climbwall: new make_loop_sound(states.climbwall, sfx_mach2),
 		groundpound: new make_loop_sound(states.groundpound, sfx_groundpoundloop),
