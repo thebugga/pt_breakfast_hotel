@@ -1,8 +1,31 @@
 function player_normal()
 {
-    hsp = movespeed;
-    var front = scr_hitwall(x + sign(hsp), y);
-    
+	hsp = movespeed * xscale
+   
+	if input.taunt.check
+	{
+		if breakdance_secret.buffer < 10
+			breakdance_secret.buffer++
+		else
+		{
+			sprite_index = spr_player_breakdance
+			breakdance_secret.spd = approach(breakdance_secret.spd, 0.6, 0.005)
+			image_speed = breakdance_secret.spd
+		}
+		
+		if breakdance_secret.spd >= 0.5
+		{
+			aftimg_timers.blur.do_it = true
+			if (!instance_exists(obj_beatbox))
+				instance_create(x, y, obj_beatbox)
+		}
+	}
+	else
+	{
+		breakdance_secret.buffer = 0
+		breakdance_secret.spd = 0.25
+	}
+	
     if (sprite_index != spr_player_land)
     {
         if (p_move)
@@ -29,8 +52,8 @@ function player_normal()
             sprite_index = spr_player_idle;
         }
     }
-    
-    if (p_move != xscale && p_move != 0 && !front)
+	
+    if (p_move != xscale && p_move != 0)
     {
         if (abs(movespeed) > 2 && abs(hsp) > 2 && grounded)
         {
@@ -40,44 +63,46 @@ function player_normal()
         }
     }
     
-    if (!input.dash.check)
-    {
-        if (p_move)
-            movespeed = approach(movespeed, 8 * xscale, 0.5);
-        else
-            movespeed = approach(movespeed, 0, 0.5);
-    }
-    else
-    {
-        if (p_move != 0)
-            xscale = p_move;
-        
-        movespeed = approach(movespeed, 12 * xscale, 0.15);
-        
+    if (input.dash.check)
+	{
+		if p_move != 0
+		{
+			xscale = p_move
+			if !place_meeting(x + p_move, y, obj_solid)
+				movespeed = twerp(TwerpType.in_expo, movespeed, 14, 0.5);
+		}
         if (movespeed >= 12)
             sprite_index = spr_player_mach3;
-        
-        if (abs(movespeed) > 2 && sprite_index != spr_player_mach2 && movespeed <= 12)
-            sprite_index = spr_player_mach1;
+        else 
+            sprite_index = spr_player_mach2;
+			
     }
-    
-    if (p_move && grounded && vsp > 0 && !front)
-    {
-        if (particle_timer > 0)
-        {
-            particle_timer--;
-        }
-        else
-        {
-            particle_timer = 12;
-            scr_sound_3d_pitched(sfx_step, x, y);
-        }
-    }
+	else
+	{
+		if p_move != 0
+		{
+			xscale = p_move
+			if !place_meeting(x + p_move, y, obj_solid)
+				 movespeed = twerp(TwerpType.inout_cubic, movespeed, 8, 0.5);
+			else
+	            movespeed = twerp(TwerpType.inout_cubic, movespeed, 0, 0.5);
+			if particle_timer > 0
+				particle_timer--
+			else if sprite_index != spr_player_breakdance
+			{
+				particle_timer = 12
+				scr_sound_3d_pitched(sfx_step, x, y)
+				create_effect(x, y + 43, spr_cloudeffect)
+			}
+		}
+		else
+			movespeed = twerp(TwerpType.inout_cubic, movespeed, 0, 0.5);
+	}
     
     switch (sprite_index)
     {
-        case spr_player_mach1:
-            reset_anim_on_end(spr_player_mach2);
+        case spr_player_mach2:
+            reset_anim_on_end(spr_player_mach3);
             break;
         
         case spr_player_land:
@@ -88,24 +113,17 @@ function player_normal()
             reset_anim_on_end(spr_player_mach3);
             break;
     }
-    
-    if (input_buffers.jump > 0 && coyote_time && gusdashpadbuffer == 0 && state != states.slide)
-    {
-        input_buffers.jump = 0;
-        create_effect(x, y - 5, spr_highjumpcloud2);
-        scr_sound_3d(sfx_jump, x, y);
-        
-        if ((movespeed >= 12 && input.dash.check) || gusdashpadbuffer > 0)
-            sprite_index = spr_player_mach3jump;
-        else
-            sprite_index = spr_player_jump;
-        
-        image_index = 0;
-        jumpAnim = true;
-        state = states.jump;
-        vsp = -11;
-        jumpstop = false;
-    }
+	
+	if (coyote_time && input_buffers.jump > 0)
+	{
+		input_buffers.jump = 0
+		vsp = -11
+		state = states.jump
+		reset_anim(spr_player_jump)
+		jumpstop = false
+		create_effect(x, y - 5, spr_highjumpcloud2)
+		scr_sound_3d(sfx_jump, x, y)
+	}	
     
     if (!grounded)
     {
@@ -120,20 +138,17 @@ function player_normal()
     
     if (place_meeting(x + hsp, y, obj_solid) && !place_meeting(x + hsp, y, obj_slope))
     {
-        if (movespeed >= 12)
-        {
-            movespeed = 0;
-            state = states.bump;
-            sprite_index = spr_player_wallsplat;
-            image_index = 0;
-            create_effect(x + (16 * xscale), y, spr_bumpeffect);
-            hsp = -xscale * 4;
-            vsp = -5;
-            exit;
-        }
-    }
+        movespeed = 0;
+        state = states.bump;
+        sprite_index = spr_player_wallsplat;
+        image_index = 0;
+        create_effect(x + (16 * xscale), y, spr_bumpeffect);
+        hsp = -xscale * 4;
+        vsp = -5;
+        exit;
+	}
     
-    if (movespeed >= 12 || gusdashpadbuffer > 0)
+    if (movespeed >= 12)
     {
         if (!particle_contains_sprite(spr_mach3charge))
         {

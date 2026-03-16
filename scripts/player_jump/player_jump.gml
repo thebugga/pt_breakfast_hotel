@@ -1,9 +1,9 @@
 function player_jump()
 {
     image_speed = 0.35;
-    hsp = movespeed;
+    hsp = movespeed * xscale;
     
-    if (scr_hitwall(x + hsp, y, obj_solid) && gustavodash != 51)
+    if (scr_hitwall(x + hsp, y, obj_solid))
     {
         movespeed = 0;
         
@@ -18,26 +18,7 @@ function player_jump()
             exit;
         }
     }
-    
-    if (!input.dash.check)
-    {
-        if (p_move != 0)
-        {
-            if (p_move == xscale)
-                movespeed = lerp(movespeed, xscale * 8, 0.05);
-            else
-                movespeed = lerp(movespeed, 0, 0.05);
-        }
-        else
-        {
-            movespeed = lerp(movespeed, 0, 0.05);
-        }
-    }
-    else
-    {
-        movespeed = lerp(movespeed, xscale * 12, 0.015);
-    }
-	
+  
     if (anim_ended())
     {
         switch (sprite_index)
