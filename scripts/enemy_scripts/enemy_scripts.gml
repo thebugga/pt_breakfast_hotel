@@ -119,21 +119,11 @@ function do_scared()
 
 function do_enemygibs()
 {
-	array_push(obj_backbloodhandler.bloods, {
-		myroom: room,
-		index: 0,
-		sprite: spr_paintSplatterTest_big,
-		x: x,
-		y: y,
-		scale: random_range(1,2),
-		rotate: irandom(360)
-	})
-	repeat 5
-		particle_create(x, y, particles.blood)
 	repeat 5
 		instance_create(x, y, obj_gibthing)
 	repeat 10
 		instance_create(x, y, obj_lagblood)
+	instance_create(x, y, obj_backblood)
 }
 
 function do_enemy_generics()

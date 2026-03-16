@@ -11,8 +11,7 @@ enum particles {
 	yellowstar,
 	sparks,
 	text,
-	noisebump,
-	blood
+	noisebump
 }
 
 function particle_create(_x, _y, p_type, _xscale = 1, _yscale = 1, _sprite = noone)
@@ -103,18 +102,6 @@ function particle_create(_x, _y, p_type, _xscale = 1, _yscale = 1, _sprite = noo
 				sprite_index = spr_noisebump
 				image_speed = 0.5
 				depth = -100
-				break;
-			case particles.blood:
-				var randomsprite = spr_paintSplatterTest_big
-				array_push(obj_backbloodhandler.bloods, {
-					myroom: room,
-					sprite: randomsprite,
-					index: irandom(sprite_get_number(randomsprite) - 1),
-					x: x,
-					y: y,
-					scale: random_range(0.1,1.5),
-					rotate: irandom(360)
-				})
 				break;
 		}
 		

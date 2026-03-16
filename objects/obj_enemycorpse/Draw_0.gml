@@ -1,5 +1,3 @@
-
-/*
 if dopalette
 {
 	if (pal_select == 12 || obj_player.pal_select >= 20) && string_starts_with(sprite_get_name(sprite_index), "spr_palettedresserdebris")
@@ -11,4 +9,3 @@ if dopalette
 }
 else
 	draw_self()
-*/

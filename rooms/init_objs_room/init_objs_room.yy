@@ -26,7 +26,6 @@
     {"name":"inst_1720CD45","path":"rooms/init_objs_room/init_objs_room.yy",},
     {"name":"inst_694E3E98","path":"rooms/init_objs_room/init_objs_room.yy",},
     {"name":"inst_2CBAA626","path":"rooms/init_objs_room/init_objs_room.yy",},
-    {"name":"inst_3294BB54","path":"rooms/init_objs_room/init_objs_room.yy",},
   ],
   "isDnd":false,
   "layers":[
@@ -51,7 +50,6 @@
         {"$GMRInstance":"v4","%Name":"inst_1720CD45","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_1720CD45","objectId":{"name":"obj_particlecontroller_close","path":"objects/obj_particlecontroller_close/obj_particlecontroller_close.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":-32.0,"y":480.0,},
         {"$GMRInstance":"v4","%Name":"inst_694E3E98","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_694E3E98","objectId":{"name":"obj_shakytext","path":"objects/obj_shakytext/obj_shakytext.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":480.0,"y":448.0,},
         {"$GMRInstance":"v4","%Name":"inst_2CBAA626","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_2CBAA626","objectId":{"name":"obj_timer","path":"objects/obj_timer/obj_timer.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":-32.0,"y":512.0,},
-        {"$GMRInstance":"v4","%Name":"inst_3294BB54","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_3294BB54","objectId":{"name":"obj_backbloodhandler","path":"objects/obj_backbloodhandler/obj_backbloodhandler.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":-32.0,"y":0.0,},
       ],"layers":[],"name":"Instances","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
     {"$GMRBackgroundLayer":"","%Name":"Background","animationFPS":15.0,"animationSpeedType":0,"colour":4278190080,"depth":100,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"hspeed":0.0,"htiled":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"layers":[],"name":"Background","properties":[],"resourceType":"GMRBackgroundLayer","resourceVersion":"2.0","spriteId":null,"stretch":false,"userdefinedAnimFPS":false,"userdefinedDepth":false,"visible":true,"vspeed":0.0,"vtiled":false,"x":0,"y":0,},
   ],
