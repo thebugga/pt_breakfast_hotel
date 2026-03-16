@@ -1,0 +1,161 @@
+function player_mach3() 
+{
+	hsp = movespeed * xscale;
+	var dashpad = sprite_index == spr_player_dashpad
+	
+	if (!particle_contains_sprite(spr_superdashcloud) && grounded)
+		particle_create(x, y, particles.genericpoof, xscale, 1, spr_superdashcloud)
+	
+	if (input_buffers.jump > 0 && coyote_time) 
+	{
+		input_buffers.jump = 0
+		vsp = -11
+		jumpstop = false
+		reset_anim(spr_player_jump)
+		scr_sound_3d(sfx_jump, x, y)
+		//state = states.jump
+		particle_create(x, y, particles.genericpoof, xscale, 1, spr_jumpdust)
+	}
+	
+	if (hsp != 0)
+	{
+		if (movespeed >= 12)
+		{
+			sprite_index = spr_player_mach3;
+		}
+		else if (input.dash.check)
+		{
+			sprite_index = spr_player_mach2
+		}
+	}
+	
+	if (grounded)
+	{
+		if (sprite_index == spr_player_Sjumpcancel)
+			sprite_index = spr_player_mach3
+			
+		if (!input.dash.check && !dashpad)
+		{
+			state = states.normal
+			movespeed = 0
+		}
+		if (p_move != xscale && p_move != 0 && !dashpad)
+		{
+			if (abs(movespeed) > 2 && abs(hsp) > 2 && grounded)
+			{
+				state = states.slide;
+				sprite_index = spr_player_machslideboost3;
+				movespeed = abs(movespeed);
+			}
+		}
+		
+		if (movespeed < 12 && grounded && !place_meeting(x + xscale, y, obj_solid))
+			movespeed = approach(movespeed, 12, 0.5);
+			
+		if (input.up.check || input.superjump.check) && !dashpad && vsp >= 0
+		{
+			state = states.superjump
+			reset_anim(spr_player_superjumpprep)
+		}
+	}
+	else
+	{
+		if (!jumpstop && !input.jump.check && vsp < 0)
+		{
+			jumpstop = true
+			vsp /= 10
+		}
+	}
+	
+	do_slope_momentum()
+	
+	if (input.down.check)
+	{
+		state = states.tumble
+		
+		if grounded
+			reset_anim(spr_player_machroll)
+		else
+		{
+			sprite_index = spr_player_mach2jump
+			vsp = 10
+		}
+		
+		particle_create(x, y, particles.genericpoof, xscale, 1, spr_jumpdust)
+	}
+	
+	do_grab()
+	
+	if ((!grounded || scr_slope(x, y + 1)) && scr_hitwall(x + xscale, y))
+	{
+		if character == characters.peppino
+		{
+			wallspeed = movespeed
+			if movespeed < 1
+				wallspeed = 1
+			else
+				movespeed = wallspeed
+			state = states.climbwall
+		}
+		else if character == characters.noise && !scr_goupwall()
+		{
+			movespeed = 0
+			vsp = -17 + wallbouncedampen
+			wallbouncedampen += 2.55
+			state = states.wallbounce
+			sprite_index = spr_playerN_wallbounce
+			scr_sound_3d(sfx_N_wallkick, x, y)
+			particle_create(x, y, particles.noisebump)
+		}
+	}
+	else if grounded && scr_hitwall(x + xscale, y) && !place_meeting(x + xscale, y, obj_metalblock)
+	{
+		state = states.bump
+		vsp = -6
+		hsp = xscale * -6
+		shake_camera(20, 40 / room_speed)
+		reset_anim(spr_player_mach3hitwall)
+		scr_sound_3d(sfx_groundpound, x, y)
+		scr_sound_3d(sfx_bumpwall, x, y)
+		create_effect(x, y, spr_bumpeffect)
+		
+		with par_enemy
+		{
+			if grounded && vsp >= 0 && bbox_in_camera()
+			{
+				state = states.stun
+				stun_timer = 200
+				vsp = -5
+				hsp = 0
+			}
+		}
+	}
+	
+	image_speed = 0.4
+	switch (sprite_index)
+	{
+		case spr_player_crazyrun:
+			image_speed = 0.75
+			break;
+		case spr_player_mach3jump:
+		case spr_player_rollgetup:
+		case spr_player_mach3hit:
+		case spr_player_dashpad:
+			reset_anim_on_end(spr_player_mach3)
+			break;
+	}
+	
+	if character == characters.noise
+		do_crusher()
+	
+	do_taunt()
+	
+	aftimg_timers.mach.do_it = true
+	instakill = true
+	
+	if !particle_contains_sprite(spr_mach3charge)
+	{
+		create_followingeffect(spr_mach3charge, states.normal, xscale)
+		create_followingeffect(spr_speedlines, states.normal, xscale)
+	}
+}

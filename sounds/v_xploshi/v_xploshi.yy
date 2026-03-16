@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"v_xploshi",
+  "audioGroupId":{
+    "name":"ag_sfx",
+    "path":"audiogroups/ag_sfx",
+  },
+  "bitDepth":1,
+  "channelFormat":1,
+  "compression":2,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":4.557396,
+  "exportDir":"",
+  "name":"v_xploshi",
+  "parent":{
+    "name":"Voice",
+    "path":"folders/Sounds/Voice.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":48000,
+  "soundFile":"v_xploshi.wav",
+  "volume":0.4,
+}
