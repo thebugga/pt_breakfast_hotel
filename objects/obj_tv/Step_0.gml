@@ -26,7 +26,7 @@ switch (state)
 			sprite_index = spr_tv_highcombo
 		else if global.combo.count >= 3
 			sprite_index = spr_tv_combo
-		else if sprite_index != spr_tv_idle1 && sprite_index != spr_tv_idle2 && sprite_index != spr_tvP_secret
+		else if sprite_index != spr_tv_idle1 && sprite_index != spr_tv_idle2
 			sprite_index = spr_tv_idle
 		
 		tv_do_transfos(p.state)
@@ -42,7 +42,7 @@ switch (state)
 		if anim_ended() && (sprite_index == spr_tv_idle1 || sprite_index == spr_tv_idle2)
 			sprite_index = spr_tv_idle
 		
-		if p.state == states.normal
+		if p.state == states.mach3
 		{
 			if (abs(obj_player.hsp) >= 16)
 				tv_expression(spr_tv_mach4)
@@ -63,13 +63,13 @@ switch (state)
 		switch (sprite_index)
 		{
 			case spr_tv_mach3:
-				if (p.state != states.normal && p.state != states.climbwall && p.sprite_index != p.spr_player_machslideboost3)
+				if (p.state != states.mach3 && p.state != states.climbwall && p.sprite_index != p.spr_player_machslideboost3)
 					tv_expression(spr_tv_idle)
-				if (abs(obj_player.hsp) >= 16 && p.state == states.normal)
+				if (abs(obj_player.hsp) >= 16 && p.state == states.mach3)
 					tv_expression(spr_tv_mach4)
 				break;
 			case spr_tv_mach4:
-				if (obj_player.state != states.normal && p.state != states.climbwall)
+				if (obj_player.state != states.mach3 && p.state != states.climbwall)
 					tv_expression(spr_tv_idle)
 				if (abs(obj_player.hsp) < 16)
 					tv_expression(spr_tv_mach3)

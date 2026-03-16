@@ -1,7 +1,119 @@
 function player_normal()
 {
+	var default_idle = spr_player_idle
+	var default_move = spr_player_move
+	var default_jump = spr_player_jump
+	var default_fall = spr_player_fall
+	
+	if has_shotgun
+	{
+		default_idle = spr_player_shotgun_idle
+		default_move = spr_player_shotgun_move
+		default_jump = spr_player_shotgun_jump
+		default_fall = spr_player_shotgun_fall
+	}
+	else if global.combo.count >= 50
+	{
+		default_idle = spr_player_rageidle
+		default_move = spr_player_ragemove
+	}
+	else if global.combo.count >= 25
+	{
+		default_idle = spr_player_madidle
+		default_move = spr_player_madmove
+	}
+	
+	if winding >= 1800
+		default_idle = spr_player_winding
+	
+	if global.panic.active
+	{
+		default_idle = spr_player_panic
+		
+		if global.panic.timer <= 0
+		{
+			default_idle = spr_player_hurtidle
+			default_move = spr_player_hurtmove
+			default_jump = spr_player_hurtjump
+			default_fall = spr_player_hurtjump
+		}
+	}
+	
+	if p_move != 0
+	{
+		if dir != xscale
+		{
+			movespeed = 0
+			dir = xscale
+		}
+		xscale = p_move
+		if !place_meeting(x + p_move, y, obj_solid)
+		{
+			movespeed = approach(movespeed, 8, movespeed > 8 ? 0.1 : 0.5)
+			if (floor(movespeed) == 8)
+				movespeed = 6
+		}
+		else
+			movespeed = 0
+		if particle_timer > 0
+			particle_timer--
+		else if sprite_index != spr_player_breakdance
+		{
+			particle_timer = 12
+			scr_sound_3d_pitched(sfx_step, x, y)
+			create_effect(x, y + 43, spr_cloudeffect)
+		}
+	}
+	else
+		movespeed = 0
+	
 	hsp = movespeed * xscale
-   
+	
+	var idlegestures = [
+		spr_player_idle1, 
+		spr_player_idle2, 
+		spr_player_idle3, 
+		spr_player_idle4, 
+		spr_player_idle5,
+		spr_player_idle6
+	]
+	
+	if p_move != 0
+		idletimer = 120
+	
+	if (breakdance_secret.buffer < 10)
+	{
+		if p_move != 0
+		{
+			if (sprite_index != spr_player_landmove && sprite_index != spr_player_shotgun_land)
+				sprite_index = default_move
+		}
+		else
+		{
+			if !has_shotgun
+			{
+				if (idletimer <= 0 && idletimer != -4)
+				{
+					reset_anim(idlegestures[irandom(5)])
+					idletimer = -4
+					if irandom(100) >= 50
+						scr_sound_pitched(choose(v_pep_bah, v_pep_alright, v_pep_alright_high, v_pep_paranoid, v_pep_paParanoid), 0.5, 1.5)
+				}
+				
+				if (anim_ended() && idletimer == -4)
+				{
+					reset_anim(default_idle)
+					idletimer = 180
+				}
+			}
+			
+			if (sprite_index != spr_player_machslideend && sprite_index != spr_player_land && sprite_index != spr_player_bodyslamland && sprite_index != spr_player_facehurt && sprite_index != spr_player_shotgun_land && idletimer > 0)
+				sprite_index = default_idle
+		}
+	}
+	
+	image_speed = 0.35
+	
 	if input.taunt.check
 	{
 		if breakdance_secret.buffer < 10
@@ -26,146 +138,69 @@ function player_normal()
 		breakdance_secret.spd = 0.25
 	}
 	
-    if (sprite_index != spr_player_land)
-    {
-        if (p_move)
-        {
-            sprite_index = spr_player_move;
-        }
-        else if (sprite_index != spr_player_idle1)
-        {
-            sprite_index = spr_player_idle;
-            
-            if (idletimer < 400)
-                idletimer++;
-            
-            if (idletimer >= 150)
-            {
-                idletimer = -4;
-                sprite_index = spr_player_idle1;
-                image_index = 0;
-            }
-        }
-        else if (anim_ended())
-        {
-            idletimer = 0;
-            sprite_index = spr_player_idle;
-        }
-    }
-	
-    if (p_move != xscale && p_move != 0)
-    {
-        if (abs(movespeed) > 2 && abs(hsp) > 2 && grounded)
-        {
-            state = states.slide;
-            sprite_index = spr_player_machslideboost3;
-            movespeed = abs(movespeed);
-        }
-    }
-    
-    if (input.dash.check)
+	if (input.down.check || !scr_can_uncrouch())
 	{
-		if p_move != 0
-		{
-			xscale = p_move
-			if !place_meeting(x + p_move, y, obj_solid)
-				movespeed = twerp(TwerpType.in_expo, movespeed, 14, 0.5);
-		}
-        if (movespeed >= 12)
-            sprite_index = spr_player_mach3;
-        else 
-            sprite_index = spr_player_mach2;
-			
-    }
-	else
-	{
-		if p_move != 0
-		{
-			xscale = p_move
-			if !place_meeting(x + p_move, y, obj_solid)
-				 movespeed = twerp(TwerpType.inout_cubic, movespeed, 8, 0.5);
-			else
-	            movespeed = twerp(TwerpType.inout_cubic, movespeed, 0, 0.5);
-			if particle_timer > 0
-				particle_timer--
-			else if sprite_index != spr_player_breakdance
-			{
-				particle_timer = 12
-				scr_sound_3d_pitched(sfx_step, x, y)
-				create_effect(x, y + 43, spr_cloudeffect)
-			}
-		}
-		else
-			movespeed = twerp(TwerpType.inout_cubic, movespeed, 0, 0.5);
+		reset_anim(!has_shotgun ? spr_player_crouchdown : spr_player_shotgun_crouchstart)
+		state = states.crouch
 	}
-    
-    switch (sprite_index)
-    {
-        case spr_player_mach2:
-            reset_anim_on_end(spr_player_mach3);
-            break;
-        
-        case spr_player_land:
-            reset_anim_on_end(spr_player_idle);
-            break;
-        
-        case spr_player_mach3jump:
-            reset_anim_on_end(spr_player_mach3);
-            break;
-    }
+	
+	if !grounded
+	{
+		dir = xscale
+		state = states.jump
+		reset_anim(default_fall)
+	}
+	
+	if character == characters.noise && ((input.up.check && input_buffers.jump > 0) || input.superjump.pressed) && vsp >= 0
+	{
+		input_buffers.jump = 0
+		state = states.superjump
+		reset_anim(spr_player_superjumpprep)
+	}
 	
 	if (coyote_time && input_buffers.jump > 0)
 	{
 		input_buffers.jump = 0
 		vsp = -11
 		state = states.jump
-		reset_anim(spr_player_jump)
+		reset_anim(default_jump)
 		jumpstop = false
 		create_effect(x, y - 5, spr_highjumpcloud2)
 		scr_sound_3d(sfx_jump, x, y)
-	}	
-    
-    if (!grounded)
-    {
-        state = states.jump;
-        jumpAnim = false;
-        
-        if (movespeed >= 12)
-            sprite_index = spr_player_mach3jump;
-        else
-            sprite_index = spr_player_fall;
-    }
-    
-    if (place_meeting(x + hsp, y, obj_solid) && !place_meeting(x + hsp, y, obj_slope))
-    {
-        movespeed = 0;
-        state = states.bump;
-        sprite_index = spr_player_wallsplat;
-        image_index = 0;
-        create_effect(x + (16 * xscale), y, spr_bumpeffect);
-        hsp = -xscale * 4;
-        vsp = -5;
-        exit;
 	}
-    
-    if (movespeed >= 12)
-    {
-        if (!particle_contains_sprite(spr_mach3charge))
-        {
-            create_followingeffect(spr_mach3charge, states.normal, xscale);
-            create_followingeffect(spr_speedlines, states.normal, xscale);
-        }
-        
-        if ((input.up.check || input.superjump.check) && vsp >= 0)
-        {
-            state = states.superjump;
-            reset_anim(spr_player_superjumpprep);
-        }
-        
-        instakill = true;
-    }
-    
-    image_speed = 0.35;
-    do_grab();
-    do_taunt();
+	
+	do_grab() //note: intentional game design
+	
+	if input.dash.check && !scr_hitwall(x + xscale, y)
+	{
+		state = states.mach2
+		if (movespeed < 6)
+			movespeed = 6
+		reset_anim(spr_player_mach1)
+	}
+	
+	if global.combo.count >= 25 && !particle_contains_sprite(spr_angrycloud)
+		create_followingeffect(spr_angrycloud, states.normal).image_speed = 0.35
+	
+	switch (sprite_index)
+	{
+		case spr_player_move:
+		case spr_player_hurtmove:
+		case spr_player_madmove:
+		case spr_player_ragemove:
+			if movespeed > 6
+	            image_speed = 0.6;
+			break;
+		case spr_player_machslideend:
+		case spr_player_land:
+		case spr_player_shotgun_land:
+		case spr_player_facehurt:
+			reset_anim_on_end(default_idle)
+			break;
+		case spr_player_landmove:
+			reset_anim_on_end(default_move);
+			break;
+	}
+	
+	do_taunt()
 }

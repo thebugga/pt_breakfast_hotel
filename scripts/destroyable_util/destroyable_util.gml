@@ -12,8 +12,8 @@ function break_destroyables()
 	instance_place_list(d_pos.x, d_pos.y, obj_destroyable, d_list, false)
 	
 	var horizontal_states = [
-		states.normal,
-		states.normal,
+		states.mach2,
+		states.mach3,
 		states.grab,
 		states.tumble,
 		states.punch,

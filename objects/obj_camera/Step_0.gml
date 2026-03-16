@@ -7,7 +7,7 @@ if instance_exists(obj_player)
 	
 	if target.hitstun <= 0
 	{
-		if (target.state == states.normal || target.state == states.normal)
+		if (target.state == states.normal)
 		{
 			target_spd = target.xscale * ((target.movespeed / 4) * 50)
 			appr_spd = 0.35

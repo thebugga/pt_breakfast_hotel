@@ -4,6 +4,8 @@ global.panic = {
 	timer_max: 0
 }
 
+global.laps = 0 
+
 john = {
 	image_index: 0,
 	image_speed: 0.35

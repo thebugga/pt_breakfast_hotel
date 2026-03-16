@@ -1,6 +1,8 @@
 function player_mach3() 
 {
-	hsp = movespeed * xscale;
+	hsp = xscale * movespeed
+	mach4mode = movespeed > 16
+	
 	var dashpad = sprite_index == spr_player_dashpad
 	
 	if (!particle_contains_sprite(spr_superdashcloud) && grounded)
@@ -11,46 +13,61 @@ function player_mach3()
 		input_buffers.jump = 0
 		vsp = -11
 		jumpstop = false
-		reset_anim(spr_player_jump)
+		reset_anim(spr_player_mach3jump)
 		scr_sound_3d(sfx_jump, x, y)
-		//state = states.jump
 		particle_create(x, y, particles.genericpoof, xscale, 1, spr_jumpdust)
 	}
 	
-	if (hsp != 0)
+	if (mach4mode)
 	{
-		if (movespeed >= 12)
+		if (sprite_index != spr_player_crazyrun)
 		{
-			sprite_index = spr_player_mach3;
+			flash = 8
+			sprite_index = spr_player_crazyrun
 		}
-		else if (input.dash.check)
+		
+		if !particle_contains_sprite(spr_crazyruneffect)
 		{
-			sprite_index = spr_player_mach2
+			with create_effect(x, y, spr_crazyruneffect)
+			{
+				image_xscale = other.xscale
+				depth = -150
+			}
 		}
+		
+		if (flamecloud_buffer > 0)
+			flamecloud_buffer--
+		else
+		{
+			flamecloud_buffer = 20
+			create_effect(x, y, spr_flamecloud)
+		}
+	}
+	else if (sprite_index == spr_player_crazyrun)
+	{
+		flash = 8
+		sprite_index = spr_player_mach3
 	}
 	
 	if (grounded)
 	{
 		if (sprite_index == spr_player_Sjumpcancel)
 			sprite_index = spr_player_mach3
-			
 		if (!input.dash.check && !dashpad)
 		{
-			state = states.normal
-			movespeed = 0
+			reset_anim(spr_player_machslidestart)
+			state = states.slide
+			scr_sound_3d(sfx_break, x, y)
 		}
-		if (p_move != xscale && p_move != 0 && !dashpad)
+		if (p_move != 0 && p_move != xscale && !dashpad)
 		{
-			if (abs(movespeed) > 2 && abs(hsp) > 2 && grounded)
-			{
-				state = states.slide;
-				sprite_index = spr_player_machslideboost3;
-				movespeed = abs(movespeed);
-			}
+			reset_anim(spr_player_machslideboost3)
+			state = states.slide
+			scr_sound_3d_on(myemitter, sfx_machslideboost)
 		}
 		
-		if (movespeed < 12 && grounded && !place_meeting(x + xscale, y, obj_solid))
-			movespeed = approach(movespeed, 12, 0.5);
+		if (movespeed < 20 && p_move == xscale)
+			movespeed += mach4mode ? 0.1 : 0.025
 			
 		if (input.up.check || input.superjump.check) && !dashpad && vsp >= 0
 		{
@@ -155,7 +172,7 @@ function player_mach3()
 	
 	if !particle_contains_sprite(spr_mach3charge)
 	{
-		create_followingeffect(spr_mach3charge, states.normal, xscale)
-		create_followingeffect(spr_speedlines, states.normal, xscale)
+		create_followingeffect(spr_mach3charge, states.mach3, xscale)
+		create_followingeffect(spr_speedlines, states.mach3, xscale)
 	}
 }

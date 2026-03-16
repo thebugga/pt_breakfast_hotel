@@ -40,7 +40,7 @@ function player_mach2()
 			movespeed += 0.1
 		else
 		{
-			state = states.normal
+			state = states.mach3
 			flash = 8
 			if sprite_index != spr_player_rollgetup
 				sprite_index = spr_player_mach3

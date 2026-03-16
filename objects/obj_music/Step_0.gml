@@ -113,8 +113,15 @@ if isPanic
 			audio_stop_sound(panic_pinch_mu)
 			panic_pinch_mu = noone
 		}
+		var thething
+		if global.laps == 1
+			thething = "lap2"
+		if global.laps == 2
+			thething = "lap3"
+		if global.laps >= 3
+			thething = "MultiLap"
 		
-		panic_mu = scr_sound(asset_player_get("lap2", obj_player.charletter, "mu_"), true)
+		panic_mu = scr_sound(asset_player_get(thething, obj_player.charletter, "mu_"), true)
 		audio_sound_loop_start(panic_mu, 22.48)
 		audio_sound_loop_end(panic_mu, 171.40)
 

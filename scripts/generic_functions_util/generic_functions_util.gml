@@ -326,6 +326,7 @@ function create_follower(_x, _y, spr_idle = noone, spr_move = noone, spr_panic =
 function reset_level()
 {
 	global.panic.active = false
+	global.laps = 0
 	global.secret = false
 	var _ln = global.level_data.level_name //dont reset the name
 	global.combo.count = 0
