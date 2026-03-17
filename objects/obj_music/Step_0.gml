@@ -116,9 +116,7 @@ if isPanic
 		var thething
 		if global.laps == 1
 			thething = "lap2"
-		if global.laps == 2
-			thething = "lap3"
-		if global.laps >= 3
+		if global.laps >= 2
 			thething = "MultiLap"
 		
 		panic_mu = scr_sound(asset_player_get(thething, obj_player.charletter, "mu_"), true)

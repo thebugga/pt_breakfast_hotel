@@ -93,6 +93,8 @@ if (prev_rank_ix != rank_ix)
 
 draw_sprite_ext(spr_ranks_hud, rank_ix, r_pos.x, r_pos.y, rank_scale, rank_scale, 0, c_white, 1)
 rank_scale = max(rank_scale - 0.2, 1)
+if global.laps >= 2
+draw_sprite_ext(spr_trophy_hud, trophy_index, r_pos.x + 69, r_pos.y, 1, 1, 0, trophy_blend, 1)
 
 var hf = spr_ranks_hudfill
 

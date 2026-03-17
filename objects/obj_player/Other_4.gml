@@ -91,3 +91,12 @@ other.ystart = other.y
 	
 if state = states.backtohub
 	y -= screen_h * 2
+
+if global.laps == 2
+{
+	var debris = layer_create(-9999, "panicbricks_escape")
+	var create = layer_background_create(debris, bg_falingdebris)
+	layer_background_htiled(create, 1)
+	layer_background_vtiled(create, 1)
+	layer_vspeed(debris, 4)
+}

@@ -7,7 +7,10 @@ if (sprite_index == spr_pizzaportalend && !obj_fade.fade)
 	ds_list_clear(global.ds_escapesaveroom)
 	global.laps++
 	obj_music.lap2 = true
-	if global.laps <= 3
+	if global.laps <= 2
 		obj_music.lap2_init = false
+	if global.laps == 2
+		global.panic.timer = 0
 	global.level_data.lap2 = true
+	scr_savecheckpoints()
 }

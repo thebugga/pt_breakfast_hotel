@@ -1,3 +1,4 @@
+
 function anim_ended(_img_index = image_index, _img_number = image_number)
 {
 	return _img_index >= _img_number - 1;
@@ -195,7 +196,7 @@ function player_sounds()
 	{
 		if state != states.superjump
 			audio_stop_sound(sfx_N_superjumphold)
-		if state == states.normal || state == states.normal
+		if state == states.mach2 || state == states.mach3
 		{
 			if machNsnd == noone
 				machNsnd = scr_sound_3d_on(myemitter, sfx_machN, true)
@@ -204,7 +205,7 @@ function player_sounds()
 				var _machlooppoints = { s: 0, e: 9.03}
 				if sprite_index == spr_playerN_crazyrun
 					_machlooppoints = { s: 16.53, e: 26.59}
-				else if state == states.normal
+				else if state == states.mach3
 					_machlooppoints = { s: 9.037, e: 13.895}
 				
 				if audio_sound_get_track_position(machNsnd) < _machlooppoints.s - 1
@@ -214,13 +215,13 @@ function player_sounds()
 				
 				if grounded
 				{
-					if state == states.normal
+					if state == states.mach2
 					{
 						audio_stop_sound(sfx_N_mach3floor)
 						if !audio_is_playing(sfx_N_mach2floor)
 							scr_sound_3d_on(myemitter, sfx_N_mach2floor, true)
 					}
-					if state == states.normal
+					if state == states.mach3
 					{
 						audio_stop_sound(sfx_N_mach2floor)
 						if !audio_is_playing(sfx_N_mach3floor)
@@ -297,7 +298,7 @@ function do_hurt(obj = noone)
 	
 	scr_sound_pitched(sfx_hurt, 0.9, 1.1)
 	if irandom(100) >= 50
-		scr_sound_pitched(v_pep_hurt, 0.7, 1.3)
+		scr_sound_pitched(choose(v_pep_hurt, v_pep_hurt2), 0.7, 1.3)
 	
 	particle_create(x, y, particles.parry)
 	particle_create(x, y, particles.bang)

@@ -492,5 +492,5 @@ function _remap(value, min_input, max_input, min_output, max_output) {
 	return lerp(min_output, max_output, _t);
 }
 
-if !IS_DEBUG
-	instance_destroy()
+//if !IS_DEBUG
+//	instance_destroy()

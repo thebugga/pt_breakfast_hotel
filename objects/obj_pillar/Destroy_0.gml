@@ -29,7 +29,6 @@ repeat (3)
 	particle_create(x, y, particles.stars)
 }
 
-
 global.combo.count++
 global.combo.timer = 60
 

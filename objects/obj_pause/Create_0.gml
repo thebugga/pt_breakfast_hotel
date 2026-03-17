@@ -69,6 +69,7 @@ baseoptions = [
 			vsp = 0
 		}
 		reset_level()
+		scr_resetcheckpoints()
 	}),
 	new create_pause_option("RESTART LEVEL",	optiontypes.level,	2, function() {
 		do_unpause()
@@ -92,6 +93,7 @@ baseoptions = [
 		else
 			show_debug_message("start room was unset")
 		reset_level()
+		scr_resetcheckpoints()
 	}),
 	new create_pause_option("CHEF TASKS",		optiontypes.level,	8),
 	new create_pause_option("EXIT LEVEL",		optiontypes.level,	3, function() {
@@ -113,6 +115,7 @@ baseoptions = [
 		
 		instance_create(0, 0, obj_fadevisual)
 		reset_level()
+		scr_resetcheckpoints()
 		
 		global.in_level = false
 		global.doorshut = true

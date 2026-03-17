@@ -370,13 +370,6 @@ function reset_level()
 	}
 }
 
-function quick_ini_write_real(inistr, section, key, value)
-{
-	ini_open(inistr)
-	ini_write_real(section, key, value)
-	ini_close()
-}
-
 function gpu_set_blendmode_normal_fixed()
 {
 	gpu_set_blendmode_ext_sepalpha(bm_src_alpha, bm_inv_src_alpha, bm_src_alpha, bm_dest_alpha)
@@ -598,3 +591,10 @@ function twerp(_type, _start, _end, _pos, _looped = false) {
   	#endregion
   }
 }
+
+function c_rainbow(divider) {
+	randomize ()
+	return make_color_hsv ((current_time / divider) mod 255,255,255);
+}
+
+

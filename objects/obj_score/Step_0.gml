@@ -11,3 +11,13 @@ display_y = approach(display_y, y_goto, 25)
 
 x = 121 + irandom_range(shake_mag, -shake_mag)
 y = display_y + irandom_range(shake_mag, -shake_mag)
+
+if check_p_rank()
+	trophy_index = 1
+else
+	trophy_index = 0
+	
+if check_p_rank() && !global.didcheckpoint
+	trophy_blend = c_rainbow(2.5)
+else
+	trophy_blend = c_white

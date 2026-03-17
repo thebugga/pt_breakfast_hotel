@@ -24,6 +24,11 @@ input =
 
 collide_init()
 
+global.checkpointdata = -4;
+global.didcheckpoint = false;
+global.checkpointsaveroom = ds_list_create();
+
+
 #region Player States
 
 player_states = [];

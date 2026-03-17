@@ -12,6 +12,7 @@ levelsongs =
 [
 	new RoomMusic(tower_1, mu_hub, false, mu_secret, 2.1, 153.68),
 	new RoomMusic(breakfast_1, mu_entrance, false, mu_entrance_secret, 51.18, 212.58),
+	new RoomMusic(entrance_10, mu_entrance, false, mu_entrance_secret, 51.18, 212.58), // lap check
 	new RoomMusic(entrance_1, mu_entrance, false, mu_entrance_secret, 51.18, 212.58),
 	new RoomMusic(boss_test, mu_pepperman, false)
 ]

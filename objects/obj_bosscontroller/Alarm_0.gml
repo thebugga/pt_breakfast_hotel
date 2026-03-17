@@ -1,4 +1,5 @@
 reset_level()
+scr_resetcheckpoints()
 
 with obj_player
 {

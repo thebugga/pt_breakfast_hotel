@@ -10,7 +10,7 @@
   "compression":2,
   "compressionQuality":4,
   "conversionMode":0,
-  "duration":41.560833,
+  "duration":78.0065,
   "exportDir":"",
   "name":"mu_P_MultiLap",
   "parent":{

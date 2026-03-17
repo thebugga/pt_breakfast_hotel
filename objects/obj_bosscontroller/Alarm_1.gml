@@ -13,6 +13,7 @@ ini_close()
 
 room_goto(tower_1)
 reset_level()
+scr_resetcheckpoints()
 
 with obj_player
 {
