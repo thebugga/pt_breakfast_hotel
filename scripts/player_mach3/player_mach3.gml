@@ -61,6 +61,7 @@ function player_mach3()
 		}
 		if (p_move != 0 && p_move != xscale && !dashpad)
 		{
+			wallspeed = min(movespeed, 12)
 			reset_anim(spr_player_machslideboost3)
 			state = states.slide
 			scr_sound_3d_on(myemitter, sfx_machslideboost)

@@ -3,8 +3,9 @@ function player_climbwall()
 	vsp = -wallspeed
 	hsp = 0
 	
-	wallspeed = min(wallspeed + 0.15, 20)
+	wallspeed = min(wallspeed, 20)
 	
+	wallspeed = approach(wallspeed, -1, 0.5)
 	if (wallspeed < 0)
 	{
 		if (mach4mode == 0)
@@ -46,11 +47,24 @@ function player_climbwall()
 			}
 		}
 	}
-	else if scr_solid(x, y - 1)
+	else 
 	{
-		state = states.bump
-		reset_anim(spr_player_ceilinghit)
-		scr_sound_3d(sfx_groundpound, x, y)
+		if wallspeed == -1
+		{
+			movespeed = xscale * -8
+			vsp = -17 + wallbouncedampen
+			wallbouncedampen += 2.55
+			state = states.wallbounce
+			sprite_index = spr_playerN_wallbounce
+			scr_sound_3d(sfx_N_wallkick, x, y)
+			particle_create(x, y, particles.noisebump)
+		}
+		if scr_solid(x, y - 1)
+		{
+			state = states.bump
+			reset_anim(spr_player_ceilinghit)
+			scr_sound_3d(sfx_groundpound, x, y)
+		}
 	}
 	
 	grabclimbbuffer = approach(grabclimbbuffer, 0, 1)
