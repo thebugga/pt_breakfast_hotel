@@ -5,7 +5,8 @@ else if floor(image_index) != 8
 else
     image_speed = 0
 
-collide_simple()
+if collidema
+	collide_simple()
 
 if vsp > 10
 	vsp = 10

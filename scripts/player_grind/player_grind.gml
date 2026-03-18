@@ -10,7 +10,7 @@ function player_grind()
 		input_buffers.jump = 0
 		vsp = -12
 		jumpstop = false
-		state = states.normal
+		state = states.mach2
 		sprite_index = spr_player_mach2jump
 		movespeed = abs(hsp)
 		scr_sound_3d(sfx_jump, x, y)
@@ -18,7 +18,7 @@ function player_grind()
 	
 	if (!place_meeting(x, y + 4, obj_grindrail) && !place_meeting(x, y + 4, obj_grindrailslope))
 	{
-		state = states.normal
+		state = states.mach2
 		sprite_index = spr_player_mach2jump
 		movespeed = abs(hsp)
 	}

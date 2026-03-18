@@ -16,7 +16,7 @@ function player_grab()
 		input_buffers.jump = 0
 		jumpstop = false
 		vsp = -11
-		state = states.normal
+		state = states.mach2
 		reset_anim(spr_player_longjump)
 		scr_sound_3d_on(myemitter, sfx_rollgetup)
 		particle_create(x, y, particles.genericpoof, xscale, 1, spr_jumpdust)
@@ -37,7 +37,7 @@ function player_grab()
 	
 	if (grounded && sprite_index == spr_player_suplexgrabjump && image_index >= 4 && input.dash.check)
 	{
-		state = states.normal
+		state = states.mach2
 		sprite_index = spr_player_mach2
 	}
 	
@@ -89,7 +89,7 @@ function player_grab()
 	
 	if anim_ended() && input.dash.check && sprite_index == spr_player_suplexdash
 	{
-		state = states.normal
+		state = states.mach2
 		sprite_index = spr_player_mach2
 	}
 	

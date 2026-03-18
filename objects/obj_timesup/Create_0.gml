@@ -3,6 +3,7 @@ grav = 0
 hsp = 0
 vsp = 0
 grounded = false
+collidema = true
 image_speed = 0
 alarm[0] = 50
 alarm[1] = 300

@@ -1,4 +1,4 @@
-depth = -2500
+depth = -99999
 font = global.creditsfont
 str = "do dis work?"
 align = {

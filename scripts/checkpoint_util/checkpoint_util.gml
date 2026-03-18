@@ -21,8 +21,9 @@ function scr_savecheckpoints()
 	global.combo, //18
 	obj_music.lap2, //19
 	global.panicbg, // 20
-	obj_music.lap2_init, //21
-	global.panic.active]; //22
+	obj_shakytext.str, //21
+	global.panic.active, //22
+	global.combo.timer]; //23
 	
 	global.checkpointdata = savethestuff;
 	
@@ -156,8 +157,9 @@ function scr_loadcheckpoints()
 	global.combo = loadthestuff[18];
 	obj_music.lap2 = loadthestuff[19];
 	global.panicbg = loadthestuff[20];
-	//obj_music.lap2_init = loadthestuff[21];
+	obj_shakytext.str = loadthestuff[21];
 	global.panic.active = loadthestuff[22];
+	global.combo.timer = loadthestuff[23];
 
 	global.didcheckpoint = true;
 	

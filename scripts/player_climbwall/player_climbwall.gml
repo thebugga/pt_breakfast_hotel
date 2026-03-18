@@ -23,13 +23,13 @@ function player_climbwall()
 			wallspeed = 6
 		if (wallspeed >= 6 && wallspeed < 12)
 		{
-			state = states.normal
+			state = states.mach2
 			movespeed = wallspeed
 		}
 		else if (wallspeed >= 12)
 		{
 			flash = 8
-			state = states.normal
+			state = states.mach3
 			sprite_index = spr_player_mach3
 			movespeed = wallspeed
 		}
@@ -69,7 +69,7 @@ function player_climbwall()
 		input_buffers.jump = 0
 		reset_anim(spr_player_walljumpstart)
 		movespeed = 10
-		state = states.normal
+		state = states.mach2
 		vsp = -11
 		xscale *= -1
 		jumpstop = false

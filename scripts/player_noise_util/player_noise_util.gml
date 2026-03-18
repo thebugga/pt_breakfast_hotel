@@ -5,7 +5,7 @@ function do_spin_cancel()
 		if p_move != 0
 			xscale = p_move
 		input_buffers.grab = 0
-		state = states.normal
+		state = states.mach2
 		movespeed = 12
 		jumpstop = true
 		vsp = min(vsp, -5)

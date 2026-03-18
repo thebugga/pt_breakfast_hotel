@@ -1,5 +1,8 @@
-visible = hud_get_visible() || instance_exists(obj_options) || obj_pause.pause
-
+if global.laps < 2
+	visible = hud_get_visible() || instance_exists(obj_options) || obj_pause.pause
+else
+	visible = true
+	
 if instance_exists(obj_player)
 	dir = sign(obj_player.xscale)
 
