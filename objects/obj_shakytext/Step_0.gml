@@ -1,4 +1,4 @@
-if global.laps < 2
+if global.laps < 2 && image_alpha > 0
 	visible = hud_get_visible() || instance_exists(obj_options) || obj_pause.pause
 else
 	visible = true
@@ -7,6 +7,9 @@ if instance_exists(obj_player)
 	dir = sign(obj_player.xscale)
 
 image_alpha = approach(image_alpha, show ? 1 : 0, 0.05)
+
+if image_alpha <= 0
+	visible = false
 
 if locked_pos
 {

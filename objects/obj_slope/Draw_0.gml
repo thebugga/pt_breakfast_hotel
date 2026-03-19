@@ -1,4 +1,4 @@
-draw_set_color(#fe0000)
+draw_set_color(#60d048)
 draw_set_alpha(0.68)
 draw_primitive_begin(pr_trianglelist)
 var x2 = x + (32 * image_xscale)

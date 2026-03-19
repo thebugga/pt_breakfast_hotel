@@ -52,7 +52,7 @@ function player_climbwall()
 		if wallspeed == -1
 		{
 			movespeed = xscale * -8
-			vsp = -17 + wallbouncedampen
+			vsp = -14 + wallbouncedampen
 			wallbouncedampen += 2.55
 			state = states.wallbounce
 			sprite_index = spr_playerN_wallbounce
@@ -80,14 +80,13 @@ function player_climbwall()
 	}
 	if (input_buffers.jump > 0)
 	{
-		input_buffers.jump = 0
-		reset_anim(spr_player_walljumpstart)
-		movespeed = 10
-		state = states.mach2
-		vsp = -11
-		xscale *= -1
-		jumpstop = false
-		scr_sound_3d(sfx_jump, x, y)
+		movespeed = xscale * -8
+		vsp = -14 + wallbouncedampen
+		wallbouncedampen += 2.55
+		state = states.wallbounce
+		sprite_index = spr_playerN_wallbounce
+		scr_sound_3d(sfx_N_wallkick, x, y)
+		particle_create(x, y, particles.noisebump)
 	}
 	
 	if (particle_timer > 0)

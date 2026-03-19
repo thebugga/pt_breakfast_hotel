@@ -20,7 +20,8 @@ function break_destroyables()
 		states.hit,
 		states.swingding,
 		states.slip,
-		states.divebomb
+		states.divebomb,
+		states.wallbounce
 	]
 	
 	var vertical_states = [
@@ -31,7 +32,8 @@ function break_destroyables()
 		states.piledriver,
 		states.slip,
 		states.divebomb,
-		states.crusher
+		states.crusher,
+		states.wallbounce
 	]
 	
 	var is_h_state = false
