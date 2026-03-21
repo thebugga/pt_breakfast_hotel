@@ -39,14 +39,19 @@ function player_normal()
 		}
 	}
 	
+	hsp = movespeed * xscale
+	
 	if p_move != 0
-	{
-		if dir != xscale
-		{
-			movespeed = 0
-			dir = xscale
-		}
-		xscale = p_move
+	{	
+	    if (p_move != xscale && p_move != 0)
+	    {
+	        if (abs(movespeed) > 2 && abs(hsp) > 2 && grounded)
+	        {
+	            state = states.slide;
+	            sprite_index = spr_player_machslideboost3;
+	            movespeed = abs(movespeed);
+	        }
+	    }
 		if !place_meeting(x + p_move, y, obj_solid)
 		{
 			movespeed = approach(movespeed, 8, movespeed > 8 ? 0.1 : 0.5)
@@ -66,8 +71,6 @@ function player_normal()
 	}
 	else
 		movespeed = 0
-	
-	hsp = movespeed * xscale
 	
 	var idlegestures = [
 		spr_player_idle1, 

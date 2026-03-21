@@ -94,6 +94,7 @@ movespeed = 0
 state = states.normal
 image_speed = 0.35
 prevstate = state
+prevmvsp = movespeed
 xscale = 1
 jumpstop = false
 mach4mode = false

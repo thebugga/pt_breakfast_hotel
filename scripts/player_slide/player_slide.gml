@@ -1,57 +1,37 @@
 function player_slide() 
 {
 	hsp = movespeed * xscale
-	
-	if grounded
-		movespeed -= 0.4
-	
-	image_speed = 0.35
-	switch sprite_index
+	movespeed = approach(movespeed, 0, 0.4);
+	image_speed = 0.4;
+	sprite_index = spr_player_machslideboost3;
+	if (abs(movespeed) <= 0 || abs(hsp) <= 0)
 	{
-		case spr_player_machslideboost:
-		case spr_player_machslideboost3:
-			var ismach2 = sprite_index == spr_player_machslideboost
-
-			if anim_ended()
-				image_index = image_number - 4
-			if movespeed <= -wallspeed
+		xscale *= -1
+		if !input.dash.check
+		{
+			state = states.normal
+		}
+		else
+		{	
+			if prevstate == states.mach3
 			{
-				sprite_index = ismach2 ? spr_player_mach2 : spr_player_mach3
-				state = ismach2 ? states.mach2 : states.mach3
-				movespeed = wallspeed
-				xscale *= -1
+				state = states.mach3
+				movespeed = 10
+				sprite_index = spr_player_mach3
+				prevstate = state
 			}
-			break
-		case spr_player_machslideboostfall:
-		case spr_player_machslideboost3fall:
-			var ismach2 = sprite_index == spr_player_machslideboostfall
-			
-			if (grounded)
+			else
 			{
-				sprite_index = ismach2 ? spr_player_machslideboost : spr_player_machslideboost3;
-				image_index = image_number - 1;
+				state = states.mach2
+				movespeed = 8
+				prevstate = state
 			}
-			break
-		case spr_player_machslidestart:
-			if scr_hitwall(x + xscale, y)
-			{
-				reset_anim(spr_player_wallsplat)
-				scr_sound_3d(sfx_splat, x, y)
-				state = states.bump
-			}
-			if !movespeed
-			{
-				reset_anim(spr_player_machslideend)
-				state = states.normal
-			}
-			break
+		}
 	}
-	
 	if grounded && !particle_contains_sprite(spr_dashcloud)
 	{
 		with create_effect(x, y, spr_dashcloud)
 			image_xscale = other.xscale
 	}
-	
-	instakill = sprite_index == spr_player_machslideboost3;
+	do_grab()
 }

@@ -21,6 +21,6 @@
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"mu_entrance.wav",
+  "soundFile":"mu_entrance.mp3",
   "volume":1.0,
 }

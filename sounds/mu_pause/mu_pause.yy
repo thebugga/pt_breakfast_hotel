@@ -10,7 +10,7 @@
   "compression":2,
   "compressionQuality":4,
   "conversionMode":0,
-  "duration":117.33559,
+  "duration":126.27594,
   "exportDir":"",
   "name":"mu_pause",
   "parent":{
@@ -21,6 +21,6 @@
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":48000,
-  "soundFile":"mu_pause.wav",
+  "soundFile":"mu_pause.mp3",
   "volume":1.0,
 }

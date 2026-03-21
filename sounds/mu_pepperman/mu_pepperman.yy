@@ -10,7 +10,7 @@
   "compression":2,
   "compressionQuality":4,
   "conversionMode":0,
-  "duration":128.0888,
+  "duration":212.55836,
   "exportDir":"",
   "name":"mu_pepperman",
   "parent":{

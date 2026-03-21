@@ -64,6 +64,8 @@ function player_mach3()
 			wallspeed = min(movespeed, 12)
 			reset_anim(spr_player_machslideboost3)
 			state = states.slide
+			prevstate = states.mach3
+			prevmvsp = movespeed
 			scr_sound_3d_on(myemitter, sfx_machslideboost)
 		}
 		

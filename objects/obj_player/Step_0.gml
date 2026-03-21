@@ -46,8 +46,6 @@ else if vsp < 0
 instakill = false
 intransfo = false
 
-prevstate = state
-
 if warping
 	exit;
 
