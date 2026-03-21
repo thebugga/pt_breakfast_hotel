@@ -1,20 +1,15 @@
-RoomMusic = function(_room, _song, _iscontinuous, _secretmusic = mu_secret, _loopstart = noone, _loopend = noone) constructor
+RoomMusic = function(_room, _song, _secretmusic = "event:/music/entrancesecret") constructor
 {
 	room_number = _room
 	song = _song
-	iscontinuous = _iscontinuous
 	secretmusic = _secretmusic
-	loopstart = _loopstart
-	loopend = _loopend
 }
 
 levelsongs = 
 [
-	new RoomMusic(tower_1, mu_hub, false, mu_secret),
-	new RoomMusic(breakfast_1, mu_entrance, false, mu_entrance_secret),
-	new RoomMusic(entrance_10, mu_entrance, false, mu_entrance_secret), // lap check
-	new RoomMusic(entrance_1, mu_entrance, false, mu_entrance_secret),
-	new RoomMusic(boss_test, mu_pepperman, false)
+	new RoomMusic(tower_1, "event:/music/hub"),
+	new RoomMusic(entrance_1, "event:/music/entrance", "event:/music/entrancesecret"),
+	new RoomMusic(boss_test, "event:/music/pepperman")
 ]
 
 pauseIDS = function(pause = true)
@@ -34,9 +29,9 @@ pauseIDS = function(pause = true)
 		if variableAttempt != noone
 		{
 			if pause
-				audio_pause_sound(variableAttempt);
+				fmod_studio_event_instance_set_paused(variableAttempt, true);
 			else
-				audio_resume_sound(variableAttempt);		
+				fmod_studio_event_instance_set_paused(variableAttempt, false);		
 		}
 	}
 }
@@ -52,3 +47,5 @@ panic_music_initiated = false
 pinch_init = false
 lap2 = false
 lap2_init = false
+pillar_volume = 0
+prev_mu_path = ""

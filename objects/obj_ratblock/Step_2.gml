@@ -1,7 +1,7 @@
 with obj_player
 {
-	var can_bump = state == states.normal ||
-				   state == states.normal ||
+	var can_bump = state == states.mach2 ||
+				   state == states.mach3 ||
 				   state == states.grab ||
 				   state == states.tumble
 	if place_meeting(x + xscale, y, other) && can_bump
@@ -11,7 +11,7 @@ with obj_player
 		hsp = 5 * -xscale
 		vsp = -5
 		grounded = false
-		scr_sound_3d(sfx_bumpwall, x, y)
+		fmod_studio_event_instance_oneshot_3d("event:/sfx/misc/bump", x, y)
 		with other
 			reset_anim(sprs.bump)
 	}

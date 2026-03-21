@@ -10,14 +10,14 @@ if (other.bbox_bottom <= bbox_bottom + 1 && other.bbox_bottom >= bbox_bottom - 1
 	{
 		image_index++
 		other.hasgerome = false
-		scr_sound(sfx_unlock)
+		fmod_studio_event_instance_oneshot_3d("event:/sfx/player/unlock", x, y)
 		ds_list_add(global.ds_saveroom, id)
-		instance_create(other.x, other.y, obj_geromeopendoor)
+		instance_create(obj_player.x, obj_player.y, obj_geromeopendoor)
 	}
 	else
 	{
 		enterspr = other.spr_player_lookdoor
-		scr_sound(sfx_door)
+		fmod_studio_event_instance_oneshot("event:/sfx/misc/transition")
 		do_fade(t_room, t_door, fade_types.door)
 	}
 	

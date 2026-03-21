@@ -20,6 +20,7 @@ function string_contains(_substr, _str)
 	return string_count(_substr, _str) > 0
 }
 
+
 function string_convert_seconds_to_timer(_num, _hours = false, _thousandth = false)
 {
 	var _ms = string(floor((_num % 1) * (_thousandth ? 1000 : 10)))
@@ -170,9 +171,6 @@ function set_globals()
 	global.option_timertype = ini_read_real("options", "timertype", true)
 	global.option_timerspeedrun = ini_read_real("options", "timerspeedrun", true)
 	ini_close()
-	
-	audio_group_set_gain(ag_music, global.option_music_volume)
-	audio_group_set_gain(ag_sfx, global.option_sfx_volume)
 	
 	pal_swap_init_system(shd_pal_swapper, shd_pal_swapper, shd_pal_swapper) //cool
 	global.ds_dead_enemies = ds_list_create()
@@ -327,8 +325,6 @@ function reset_level()
 {
 	global.panic.active = false
 	global.laps = 0
-	global.secret = false
-	var _ln = global.level_data.level_name //dont reset the name
 	global.combo.count = 0
 	global.combo.timer = 0
 	global.score = 0

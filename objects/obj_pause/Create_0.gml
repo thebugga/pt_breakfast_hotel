@@ -39,6 +39,12 @@ pause_alpha = 0
 pause_image = spr_null
 optionselected = 0
 inputbuffer = 0
+buses = [obj_fmodhandler.music_group, obj_fmodhandler.sfx_group]
+pause_bus_music = fmod_studio_system_get_bus("bus:/Pause/Music")
+pause_bus_sfx = fmod_studio_system_get_bus("bus:/Pause/SFX")
+
+var _event_ref = fmod_studio_system_get_event("event:/music/pause")
+pause_music = fmod_studio_event_description_create_instance(_event_ref)
 
 optiontypes = { //enum thats actually a struct
 	hub: 0, //options only in the hub menu (like MAIN MENU)
@@ -55,9 +61,9 @@ baseoptions = [
 	new create_pause_option("MAIN MENU",		optiontypes.hub,	3, function() {
 		do_unpause()
 		if obj_music.mu != noone
-			audio_stop_sound(obj_music.mu)
+			fmod_studio_event_instance_stop(obj_music.mu, FMOD_STUDIO_STOP_MODE.IMMEDIATE)
 		if obj_music.secret_mu != noone
-			audio_stop_sound(obj_music.secret_mu)
+			fmod_studio_event_instance_stop(obj_music.secret_mu, FMOD_STUDIO_STOP_MODE.IMMEDIATE)
 		room_goto(mainmenu)
 		with obj_player
 		{
@@ -69,14 +75,13 @@ baseoptions = [
 			vsp = 0
 		}
 		reset_level()
-		scr_resetcheckpoints()
 	}),
 	new create_pause_option("RESTART LEVEL",	optiontypes.level,	2, function() {
 		do_unpause()
 		if obj_music.mu != noone
-			audio_stop_sound(obj_music.mu)
+			fmod_studio_event_instance_start(obj_music.mu, FMOD_STUDIO_STOP_MODE.IMMEDIATE) //restart
 		if obj_music.secret_mu != noone
-			audio_stop_sound(obj_music.secret_mu)
+			fmod_studio_event_instance_stop(obj_music.secret_mu, FMOD_STUDIO_STOP_MODE.IMMEDIATE)
 		if global.start_room != noone
 		{
 			room_goto(global.start_room)
@@ -93,15 +98,14 @@ baseoptions = [
 		else
 			show_debug_message("start room was unset")
 		reset_level()
-		scr_resetcheckpoints()
 	}),
 	new create_pause_option("CHEF TASKS",		optiontypes.level,	8),
 	new create_pause_option("EXIT LEVEL",		optiontypes.level,	3, function() {
 		do_unpause()
 		if obj_music.mu != noone
-			audio_stop_sound(obj_music.mu)
+			fmod_studio_event_instance_stop(obj_music.mu, FMOD_STUDIO_STOP_MODE.IMMEDIATE)
 		if obj_music.secret_mu != noone
-			audio_stop_sound(obj_music.secret_mu)
+			fmod_studio_event_instance_stop(obj_music.secret_mu, FMOD_STUDIO_STOP_MODE.IMMEDIATE)
 		with obj_player
 		{
 			spawn = noone
@@ -137,9 +141,5 @@ screen_assets = [
 	new create_pause_screen_asset(spr_pause_border, screen_w + 160, screen_h + 188, screen_w, screen_h, -1), //right border
 	new create_pause_screen_asset(spr_pause_vines, screen_w / 2, -117, screen_w / 2, 0), //vines
 ]
-
-audio_master_gain(global.option_master_volume)
-audio_group_set_gain(ag_sfx, global.option_sfx_volume, 0)
-audio_group_set_gain(ag_music, global.option_music_volume, 0)
 
 angel_timer = 240

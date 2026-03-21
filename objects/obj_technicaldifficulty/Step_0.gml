@@ -6,7 +6,7 @@ if (state != 1)
 		alarm[0] = 80
 		image_speed = 0
 		t_ix = irandom(2)
-		sprite_index = asset_player_get("bg", obj_player.charletter, "spr_techdiff")
+		sprite_index = spr_techdiff_bg
 	}
 	if (state == 2 && round(image_index) == 0)
 		instance_destroy()

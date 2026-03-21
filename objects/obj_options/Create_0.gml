@@ -82,6 +82,7 @@ list_arr = [
 			function(_val) {
 				_val /= 100
 				global.option_music_volume = _val
+				fmod_studio_bus_set_volume(obj_fmodhandler.music_group, _val)
 				audio_group_set_gain(ag_music, _val, 0)
 				quick_ini_write_real("globalsave.ini", "options", "music_volume", _val)
 			}),
@@ -89,6 +90,7 @@ list_arr = [
 			function(_val) {
 				_val /= 100
 				global.option_sfx_volume = _val
+				fmod_studio_bus_set_volume(obj_fmodhandler.sfx_group, _val)
 				audio_group_set_gain(ag_sfx, _val, 0)
 				quick_ini_write_real("globalsave.ini", "options", "sfx_volume", _val)
 			}),

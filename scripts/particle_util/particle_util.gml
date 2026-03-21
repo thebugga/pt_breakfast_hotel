@@ -82,7 +82,7 @@ function particle_create(_x, _y, p_type, _xscale = 1, _yscale = 1, _sprite = noo
 			case particles.machcharge:
 				sprite_index = spr_mach3charge
 				image_speed = 0.5
-				statetofollow = states.normal
+				statetofollow = states.mach3
 				break;
 			case particles.bang:
 				sprite_index = spr_bangeffect

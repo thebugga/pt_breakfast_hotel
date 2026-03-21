@@ -2,8 +2,8 @@
   "$GMSound":"v2",
   "%Name":"v_option_frog",
   "audioGroupId":{
-    "name":"audiogroup_default",
-    "path":"audiogroups/audiogroup_default",
+    "name":"ag_sfx",
+    "path":"audiogroups/ag_sfx",
   },
   "bitDepth":1,
   "channelFormat":1,

@@ -134,8 +134,44 @@ breakdance_secret = {
 	spd: 0.1
 }
 
-machNsnd = noone
-machNgroundsnd = noone
+make_loop_sound = function(_state, _sound, _func = noone, _looppoints = noone, _is_3d = true) constructor
+{
+	state = _state
+	sound = _sound
+	sndid = noone
+	func = _func
+	looppoints = _looppoints
+	is_3d = _is_3d
+}
+
+my_3d_attributes = new Fmod3DAttributes()
+my_3d_attributes.forward.z = 1
+my_3d_attributes.up.y = 1
+
+loop_sounds = {
+	groundpound: new make_loop_sound(states.groundpound, "event:/sfx/player/groundpound"),
+	piledriver: new make_loop_sound(states.piledriver, "event:/sfx/player/groundpound", function() { return obj_player.sprite_index != spr_player_piledriverland}),
+	superjumphold: new make_loop_sound(states.superjump, "event:/sfx/player/superjumphold", function() { return obj_player.sprite_index != spr_player_superjump && obj_player.sprite_index != spr_player_Sjumpcancelstart && obj_player.sprite_index != spr_player_presentboxspring}, 
+		[0.64, 1.84]),
+	ball: new make_loop_sound(states.ball, "event:/sfx/player/ball", function() { return obj_player.sprite_index != spr_player_ballend}),
+}
+
+var _mach_event_ref = fmod_studio_system_get_event("event:/sfx/player/mach") //string path
+mach_snd = fmod_studio_event_description_create_instance(_mach_event_ref)
+
+var _machslideboost_event_ref = fmod_studio_system_get_event("event:/sfx/player/machslideboost")
+machslideboost_snd = fmod_studio_event_description_create_instance(_machslideboost_event_ref)
+
+var _grab_event_ref = fmod_studio_system_get_event("event:/sfx/player/suplexdash")
+grab_snd = fmod_studio_event_description_create_instance(_grab_event_ref)
+
+var _getup_event_ref = fmod_studio_system_get_event("event:/sfx/player/rollgetup")
+getup_snd = fmod_studio_event_description_create_instance(_getup_event_ref)
+
+var _sjumprelease_event_ref = fmod_studio_system_get_event("event:/sfx/player/superjumprelease")
+sjumprelease_snd = fmod_studio_event_description_create_instance(_sjumprelease_event_ref)
+
+followingsnds = [mach_snd, machslideboost_snd, grab_snd, getup_snd, sjumprelease_snd] //what am i doing
 
 visual_size = 1
 secret_exit = false
@@ -152,6 +188,9 @@ hasgerome = false
 fallingtimer = 0
 
 depth = -75
+
+pal_select = 1
+pattern_spr = pat_pizza
 
 input_buffers = {
 	jump: 0,

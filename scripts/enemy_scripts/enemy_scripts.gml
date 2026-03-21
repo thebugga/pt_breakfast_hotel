@@ -113,7 +113,7 @@ function do_scared()
 		scared_timer = 100
 		sprite_index = sprs.scared
 		if irandom(100) <= 5
-			scr_sound_3d_pitched(choose(v_rarescream1, v_rarescream2), x, y)
+			fmod_studio_event_instance_oneshot_3d("event:/sfx/voice/enemyrarescream", x, y)
 	}
 }
 
@@ -138,9 +138,9 @@ function do_enemy_generics()
 				func_todo()
 		}
 	})
-	
+
 	do_scared()
-	
+
 	grav = 0.5
 	if state == states.hit
 		grav = 0
@@ -155,7 +155,7 @@ function do_enemy_generics()
 		{
 			with obj_player
 			{
-				if state == states.normal
+				if state == states.mach3
 					reset_anim(spr_player_mach3hit)
 				if !grounded && input.jump.check && state != states.groundpound
 				{
@@ -167,7 +167,7 @@ function do_enemy_generics()
 			
 			
 			shake_camera()
-			scr_sound_3d(sfx_punch, x, y)
+			fmod_studio_event_instance_oneshot_3d("event:/sfx/misc/punch", x, y)
 		
 			obj_player.hitstun = 8
 			obj_player.prev_ix = obj_player.image_index
@@ -188,7 +188,7 @@ function do_enemy_generics()
 			create_effect(x, y, spr_cloudeffect)
 			repeat 4
 				particle_create(x, y, particles.stars)
-			scr_sound_3d_pitched(sfx_bumpenemy, x, y)
+			fmod_studio_event_instance_oneshot_3d("event:/sfx/misc/enemybump", x, y)
 		}
 		with obj_player
 		{
@@ -207,7 +207,7 @@ function do_enemy_generics()
 				if !grounded
 					vsp = -6
 				
-				if input.up.check
+				if (input.up.check)
 				{
 					state = states.piledriver
 					dir = xscale
@@ -223,7 +223,7 @@ function do_enemy_generics()
 				jumpstop = true
 				
 				create_effect(x, bbox_bottom, spr_stompeffect)
-				scr_sound_3d(sfx_stompenemy, x, y)
+				fmod_studio_event_instance_oneshot_3d("event:/sfx/misc/stomp", x, y)
 				with (other)
 				{
 					xscale = -obj_player.xscale

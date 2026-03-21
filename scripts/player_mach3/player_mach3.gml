@@ -14,7 +14,7 @@ function player_mach3()
 		vsp = -11
 		jumpstop = false
 		reset_anim(spr_player_mach3jump)
-		scr_sound_3d(sfx_jump, x, y)
+		fmod_studio_event_instance_oneshot_3d("event:/sfx/player/jump", x, y)
 		particle_create(x, y, particles.genericpoof, xscale, 1, spr_jumpdust)
 	}
 	
@@ -57,16 +57,13 @@ function player_mach3()
 		{
 			reset_anim(spr_player_machslidestart)
 			state = states.slide
-			scr_sound_3d(sfx_break, x, y)
+			fmod_studio_event_instance_oneshot_3d("event:/sfx/player/break", x, y)
 		}
 		if (p_move != 0 && p_move != xscale && !dashpad)
 		{
-			wallspeed = min(movespeed, 12)
 			reset_anim(spr_player_machslideboost3)
 			state = states.slide
-			prevstate = states.mach3
-			prevmvsp = movespeed
-			scr_sound_3d_on(myemitter, sfx_machslideboost)
+			fmod_studio_event_instance_start(machslideboost_snd)
 		}
 		
 		if (movespeed < 20 && p_move == xscale)
@@ -135,8 +132,8 @@ function player_mach3()
 		hsp = xscale * -6
 		shake_camera(20, 40 / room_speed)
 		reset_anim(spr_player_mach3hitwall)
-		scr_sound_3d(sfx_groundpound, x, y)
-		scr_sound_3d(sfx_bumpwall, x, y)
+		fmod_studio_event_instance_oneshot_3d("event:/sfx/misc/slam", x, y)
+		fmod_studio_event_instance_oneshot_3d("event:/sfx/misc/bump", x, y)
 		create_effect(x, y, spr_bumpeffect)
 		
 		with par_enemy
@@ -164,9 +161,6 @@ function player_mach3()
 			reset_anim_on_end(spr_player_mach3)
 			break;
 	}
-	
-	if character == characters.noise
-		do_crusher()
 	
 	do_taunt()
 	

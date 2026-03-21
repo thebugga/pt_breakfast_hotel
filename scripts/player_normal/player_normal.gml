@@ -65,7 +65,7 @@ function player_normal()
 		else if sprite_index != spr_player_breakdance
 		{
 			particle_timer = 12
-			scr_sound_3d_pitched(sfx_step, x, y)
+			fmod_studio_event_instance_oneshot_3d("event:/sfx/player/step", x, y)
 			create_effect(x, y + 43, spr_cloudeffect)
 		}
 	}
@@ -154,13 +154,6 @@ function player_normal()
 		reset_anim(default_fall)
 	}
 	
-	if character == characters.noise && ((input.up.check && input_buffers.jump > 0) || input.superjump.pressed) && vsp >= 0
-	{
-		input_buffers.jump = 0
-		state = states.superjump
-		reset_anim(spr_player_superjumpprep)
-	}
-	
 	if (coyote_time && input_buffers.jump > 0)
 	{
 		input_buffers.jump = 0
@@ -169,7 +162,7 @@ function player_normal()
 		reset_anim(default_jump)
 		jumpstop = false
 		create_effect(x, y - 5, spr_highjumpcloud2)
-		scr_sound_3d(sfx_jump, x, y)
+		fmod_studio_event_instance_oneshot_3d("event:/sfx/player/jump", x, y)
 	}
 	
 	do_grab() //note: intentional game design

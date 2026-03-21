@@ -71,9 +71,6 @@ if fade_alpha > 0
 	{
 		if pal_select == 12 || pal_select >= 20
 			pattern_draw(sprite_index, image_index, x, y, pattern_spr, pattern_colors, xscale * visual_size, image_yscale * visual_size, image_angle, image_blend, other.player_alpha)
-
 		pal_swap_set(obj_player.pal_spr, pal_select, false)
-		draw_sprite_ext(sprite_index, image_index, x, y, xscale * visual_size, image_yscale * visual_size, image_angle, image_blend, other.player_alpha)
-		pal_swap_reset()
 	}
 }

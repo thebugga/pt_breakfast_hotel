@@ -5,9 +5,9 @@ var t = (p / tex_max) * 50 // 50% of the loading
 
 total += t
 
-for (var i = 0; i < array_length(snd_group_arr); i++) {
-	var cur_group = snd_group_arr[i][0]
-	total += audio_group_load_progress(cur_group) / (array_length(snd_group_arr) * 2) //25% per audio group, 50% for both audio groups
+for (var i = 0; i < array_length(bank_arr); i++) {
+	var cur_group = bank_arr[i][0]
+	total += audio_group_load_progress(cur_group) / (array_length(bank_arr) * 3) //33% per bank, all banks take 50%
 }
 
 //comes up to 100%
@@ -17,3 +17,5 @@ var xx = (screen_w / 2) - sprite_get_xoffset(spr_loadingscreen)
 var yy = (screen_h / 2) - sprite_get_yoffset(spr_loadingscreen)
 var upscale = sprite_get_width(spr_loadingscreen) / 100
 draw_sprite_part(spr_loadingscreen, 1, 0, 0, total * upscale, sprite_get_height(spr_loadingscreen), xx, yy)
+
+draw_text_transformed(0,0,currentsndgroup,4,4,0)

@@ -7,8 +7,7 @@ image_index = irandom(image_number - 1)
 image_speed = 0
 alarm[0] = 20
 
-scr_sound(sfx_peppinopunch)
-particle_create(mouse_x, mouse_y, particles.bang).depth = -200
+fmod_studio_event_instance_oneshot("event:/sfx/misc/peppinopunch")
 
 repeat 2
 	particle_create(mouse_x, mouse_y, particles.stars).depth = -200

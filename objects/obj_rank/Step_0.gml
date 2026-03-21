@@ -62,7 +62,7 @@ switch (state)
 				else
 				{
 					if y == other.t_ystart
-						scr_sound(sfx_spin)
+						fmod_studio_event_instance_oneshot_3d("event:/sfx/misc/spin", screen_w / 2, screen_h / 2)
 					y -= 20
 					image_yscale = 1.2
 				}
