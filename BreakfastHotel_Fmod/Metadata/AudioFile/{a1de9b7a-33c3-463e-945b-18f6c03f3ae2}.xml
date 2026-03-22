@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{a1de9b7a-33c3-463e-945b-18f6c03f3ae2}">
+		<property name="assetPath">
+			<value>SFX/sfx_slipend1.ogg</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>1</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{93e19f00-b3b8-4f81-8964-8373c7365676}</destination>
+		</relationship>
+	</object>
+</objects>

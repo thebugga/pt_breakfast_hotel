@@ -1,5 +1,5 @@
-#macro screen_w 960
-#macro screen_h 540
+#macro screen_w 1340
+#macro screen_h 754
 
 draw_flush()
 

@@ -14,7 +14,7 @@ var screen_y = 0
 
 if global.option_texturefilter && 
 	!(
-		(window_get_width() == 960 && window_get_height() == 540) || //default res
+		(window_get_width() == 1340 && window_get_height() == 754) || //default res
 		(window_get_width() == 1920 && window_get_height() == 1080) //res x2
 	)
 	gpu_set_texfilter(global.option_texturefilter)

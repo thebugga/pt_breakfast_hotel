@@ -5,7 +5,7 @@ void main()
 {
 	vec4 col = texture2D(gm_BaseTexture, v_vTexcoord);
 	
-	if (floor(mod(v_vTexcoord.y * 540.0, 2.0) * 2.0) == 0.0)
+	if (floor(mod(v_vTexcoord.y * 754.0, 2.0) * 2.0) == 0.0)
 		col.rgb -= 0.4;
 	
 	//increase blur with intensity!
