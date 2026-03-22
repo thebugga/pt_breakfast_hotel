@@ -5,7 +5,7 @@ for (var i = 0; i < array_length(tvs); i++)
 	with cur_tv
 	{
 		if pal_ix == 12
-			pattern_draw(sprite_index, image_index, x, y, pat_spr)
+			pattern_draw(sprite_index, image_index, x, y, pat_spr, pal_playerpattenrcolorsP)
 			
 		pal_swap_set(pal_playerP, pal_ix, false)
 		if sprite_index != noone

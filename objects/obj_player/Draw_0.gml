@@ -22,7 +22,7 @@ if (i_frames > 0 && state != states.hurt && state != states.fireass)
 	image_alpha = round(wave(0, 1, 0.01, 0))
 
 if pal_select == 12
-	pattern_draw(sprite_index, image_index, xx, yy, pattern_spr, xscale * visual_size, image_yscale * visual_size, image_angle, image_blend, image_alpha)
+	pattern_draw(sprite_index, image_index, xx, yy, pattern_spr, pattern_colors, xscale * visual_size, image_yscale * visual_size, image_angle, image_blend, image_alpha)
 
 pal_swap_set(pal_playerP, pal_select, false)
 draw_sprite_ext(sprite_index, image_index, xx, yy, xscale * visual_size, image_yscale * visual_size, image_angle, image_blend, image_alpha)

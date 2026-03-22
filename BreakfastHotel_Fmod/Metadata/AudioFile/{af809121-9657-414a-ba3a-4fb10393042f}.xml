@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{af809121-9657-414a-ba3a-4fb10393042f}">
+		<property name="assetPath">
+			<value>Benny Hill Show.ogg</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>11.0249996</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>63.895510204081631</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{93e19f00-b3b8-4f81-8964-8373c7365676}</destination>
+		</relationship>
+	</object>
+</objects>

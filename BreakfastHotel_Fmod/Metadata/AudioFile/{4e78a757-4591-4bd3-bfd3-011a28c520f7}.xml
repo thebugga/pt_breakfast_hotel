@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{4e78a757-4591-4bd3-bfd3-011a28c520f7}">
+		<property name="assetPath">
+			<value>eggsong.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>48.794979166666664</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{93e19f00-b3b8-4f81-8964-8373c7365676}</destination>
+		</relationship>
+	</object>
+</objects>

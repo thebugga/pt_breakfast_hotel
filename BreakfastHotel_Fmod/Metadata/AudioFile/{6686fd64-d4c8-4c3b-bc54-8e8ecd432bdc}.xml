@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{6686fd64-d4c8-4c3b-bc54-8e8ecd432bdc}">
+		<property name="assetPath">
+			<value>zyescape new.mp3</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>212.55836734693878</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{93e19f00-b3b8-4f81-8964-8373c7365676}</destination>
+		</relationship>
+	</object>
+</objects>

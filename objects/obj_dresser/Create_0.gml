@@ -11,9 +11,9 @@ clothes_arr = []
 #region Peppino Outfits
 
 clothes_arr[characters.peppino] = [	
-	new make_clothes_inst("Classic Cook",		"The one and only.",											1),
-	new make_clothes_inst("Unfunny Cook",		"Ha.",															3),	
-	new make_clothes_inst("Money Green",		"Green, like money!",											4),	
+	new make_clothes_inst("Classic Lotte",		"Chud....",											1),
+	new make_clothes_inst("OLD-School Lotte",	"Now In Old Colors.",															3),	
+	new make_clothes_inst("Retro Lotte",		"So Retro Its Fab!",											4),	
 	new make_clothes_inst("SAGE Blue",			"Nostalgia bait.",												5),	
 	new make_clothes_inst("Blood Red",			"Don't worry, it's just stained in pizza sauce.",				6),	
 	new make_clothes_inst("TV Purple",			"You are purple perfection.",									7),	

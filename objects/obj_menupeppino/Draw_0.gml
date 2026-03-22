@@ -1,5 +1,5 @@
 if (p_ix == 12 && p_spr != noone)
-	pattern_draw(sprite_index, image_index, x, y, p_spr)
+	pattern_draw(sprite_index, image_index, x, y, p_spr, pal_playerpattenrcolorsP)
 	
 pal_swap_set(pal_playerP, p_ix, false)
 draw_self()

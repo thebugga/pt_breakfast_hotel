@@ -182,11 +182,13 @@ function player_sounds()
 		if fmod_studio_event_instance_get_playback_state(mach_snd) != FMOD_STUDIO_PLAYBACK_STATE.PLAYING && fmod_studio_event_instance_get_playback_state(mach_snd) != FMOD_STUDIO_PLAYBACK_STATE.STARTING
 			fmod_studio_event_instance_start(mach_snd)
 		
-		var _mach_ix = 1
+		var _mach_ix = 0
 		
 		if sprite_index == spr_player_crazyrun
-			_mach_ix = 3
+			_mach_ix = 4
 		else if state == states.mach3
+			_mach_ix = 3
+		else if sprite_index == spr_player_mach2
 			_mach_ix = 2
 		else if sprite_index == spr_player_mach1
 			_mach_ix = 0
