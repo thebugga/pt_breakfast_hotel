@@ -57,19 +57,15 @@ if isPanic
 		pinch_init = true
 	}
 	
-	if (lap2 && !lap2_init)
+	if global.laps == 1
 	{
-		if panic_mu != noone
-		{
-			fmod_studio_event_instance_release(panic_mu)
-			fmod_studio_event_instance_stop(panic_mu, FMOD_STUDIO_STOP_MODE.ALLOWFADEOUT);
-			panic_mu = noone
-		}
-		
 		var _panic_event_ref = fmod_studio_system_get_event("event:/music/lap2")
 		panic_mu = fmod_studio_event_description_create_instance(_panic_event_ref)
-		fmod_studio_event_instance_start(panic_mu)
-		
-		lap2_init = true
+	}
+	
+	if global.laps >= 2
+	{
+		var _panic_event_ref = fmod_studio_system_get_event("event:/music/lap3")
+		panic_mu = fmod_studio_event_description_create_instance(_panic_event_ref)
 	}
 }

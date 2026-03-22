@@ -2,9 +2,9 @@
   "$GMSprite":"v2",
   "%Name":"pal_playerP",
   "bboxMode":0,
-  "bbox_bottom":6,
+  "bbox_bottom":10,
   "bbox_left":0,
-  "bbox_right":15,
+  "bbox_right":18,
   "bbox_top":0,
   "collisionKind":1,
   "collisionTolerance":0,
@@ -16,7 +16,7 @@
   ],
   "gridX":0,
   "gridY":0,
-  "height":7,
+  "height":11,
   "HTile":true,
   "layers":[
     {"$GMImageLayer":"","%Name":"1b92e1d3-209c-4f60-932e-217295e4e30e","blendMode":0,"displayName":"default","isLocked":false,"name":"1b92e1d3-209c-4f60-932e-217295e4e30e","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
@@ -86,5 +86,5 @@
   },
   "type":0,
   "VTile":true,
-  "width":16,
+  "width":19,
 }

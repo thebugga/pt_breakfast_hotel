@@ -55,12 +55,7 @@ else
 }
 
 if !_move
-{
-	x += random_range(-6, 6)
-	y += random_range(-6, 6)
-}
-
-image_alpha = approach(image_alpha, 0, 0.1)
+	image_alpha = approach(image_alpha, 0, 0.1)
 
 if (_move && place_meeting(x, y, playerid) && playerid.state != states.actor && !obj_fade.fade && !instance_exists(obj_rank) && image_alpha >= 1)
 {
@@ -82,6 +77,7 @@ if (_move && place_meeting(x, y, playerid) && playerid.state != states.actor && 
 		fmod_studio_event_instance_oneshot_3d("event:/music/timesupsfx", x, y)
 		scr_sound(mu_timesup)
 	}
+	
 	room_goto(rm_timesup)
 	instance_destroy()
 }

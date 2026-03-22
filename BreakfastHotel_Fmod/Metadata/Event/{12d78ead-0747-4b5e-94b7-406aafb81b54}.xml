@@ -5,7 +5,7 @@
 			<value>pizzaface</value>
 		</property>
 		<property name="outputFormat">
-			<value>0</value>
+			<value>1</value>
 		</property>
 		<relationship name="folder">
 			<destination>{c4df0702-0604-46bb-9800-a4c351bc9167}</destination>
@@ -84,7 +84,7 @@
 	</object>
 	<object class="MultiSound" id="{2db9849a-dad1-4529-b9ae-5ee322a75e77}">
 		<relationship name="sounds">
-			<destination>{0f330d45-445e-4077-ae7f-f0032f6b6f54}</destination>
+			<destination>{423da4fc-93f4-48ab-b2ef-accdae7af08f}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusEffectChain" id="{f5a27a26-33bd-41cb-b4c6-ef7cb86d0afc}">
@@ -99,9 +99,9 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{ed1df649-813a-4b30-9c94-f879ee0396c4}" />
-	<object class="SingleSound" id="{0f330d45-445e-4077-ae7f-f0032f6b6f54}">
+	<object class="SingleSound" id="{423da4fc-93f4-48ab-b2ef-accdae7af08f}">
 		<relationship name="audioFile">
-			<destination>{7a7d236d-a635-4086-9418-6eda4c387887}</destination>
+			<destination>{edc2c3fb-28b4-4e28-bfd6-e6ee42f860e0}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{11081130-c40d-420e-b2ca-88ea96a3e4e4}" />
