@@ -17,7 +17,11 @@ switch (state)
 			alarm[0] = 220
 			alarm[2] = 630
 			
-			scr_sound(rank_data[rank_ix].song)
+			var _rank_ref = fmod_studio_system_get_event("event:/music/rank")
+			var _rank_mu = fmod_studio_event_description_create_instance(_rank_ref)
+			fmod_studio_event_instance_set_parameter_by_name(_rank_mu, "rank_mu_index", rank_ix)
+			fmod_studio_event_instance_start(_rank_mu)
+			fmod_studio_event_instance_release(_rank_mu)
 		}
 		break;
 	case 1:

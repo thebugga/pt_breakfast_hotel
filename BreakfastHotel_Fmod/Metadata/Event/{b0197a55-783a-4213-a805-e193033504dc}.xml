@@ -93,7 +93,10 @@
 	<object class="MixerBusPanner" id="{954b3ae8-ca35-4f9f-a365-650d1acdbc0d}" />
 	<object class="SingleSound" id="{34bc7605-6aa6-4e9e-a168-82d8b77162a4}">
 		<property name="length">
-			<value>126.27591836734693</value>
+			<value>112.4990538054635</value>
+		</property>
+		<property name="pitch">
+			<value>2</value>
 		</property>
 		<relationship name="audioFile">
 			<destination>{51088aa4-8211-483c-b4de-042f697c6cd6}</destination>
@@ -118,7 +121,7 @@
 			<value>0</value>
 		</property>
 		<property name="length">
-			<value>126.27591836734693</value>
+			<value>112.4990538054635</value>
 		</property>
 		<relationship name="timeline">
 			<destination>{98fb8088-3104-4a78-875f-a69abf29fdf4}</destination>
@@ -137,9 +140,15 @@
 	<object class="MixerBusEffectChain" id="{3f37d492-5539-4af6-bc20-20a4cb470a6e}">
 		<relationship name="effects">
 			<destination>{97b8444a-e618-453e-8671-33124c687f42}</destination>
+			<destination>{8ab64339-ef6d-4789-8d64-4d2b43381b24}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{bcef6b19-c678-4d06-899f-804e80d08ea6}" />
 	<object class="MixerBusFader" id="{a0699d79-c7e0-4ff7-a72b-f3c1b1cc1728}" />
 	<object class="MixerBusFader" id="{97b8444a-e618-453e-8671-33124c687f42}" />
+	<object class="HighpassEffect" id="{8ab64339-ef6d-4789-8d64-4d2b43381b24}">
+		<property name="cutoff">
+			<value>620</value>
+		</property>
+	</object>
 </objects>

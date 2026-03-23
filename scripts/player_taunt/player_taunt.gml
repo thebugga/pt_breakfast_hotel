@@ -5,7 +5,7 @@ function player_taunt()
 	
 	var endtaunt = false
 	
-	if !string_starts_with(sprite_get_name(sprite_index), "spr_player_supertaunt")
+	if !string_contains("supertaunt", sprite_get_name(sprite_index))
 	{
 		if input.up.check && supertauntshow
 		{

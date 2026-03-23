@@ -1,6 +1,6 @@
-function anim_ended(_img_index = image_index, _img_number = image_number)
+function anim_ended(ind = sprite_index, img = image_index,  i_end = sprite_get_number(ind), i_spd = image_speed)
 {
-	return _img_index >= _img_number - 1;
+    return (img + (i_spd) * sprite_get_speed(ind) >= i_end);    
 }
 
 function do_groundpound()
@@ -18,7 +18,7 @@ function do_groundpound()
 		else
 		{
 			fmod_studio_event_instance_oneshot_3d("event:/sfx/misc/killingblow", x, y)
-			scr_sound_3d(sfx_shotgunshot, x, y)
+			fmod_studio_event_instance_oneshot_3d("event:/sfx/player/shotgunshot", x, y)
 			reset_anim(spr_player_shotgun_shootdown)
 			vsp = -11
 			with instance_create(x, y, obj_shotgunblast)
@@ -35,7 +35,7 @@ function do_grab()
 		if has_shotgun
 		{
 			fmod_studio_event_instance_oneshot_3d("event:/sfx/misc/kill", x, y)
-			scr_sound_3d(sfx_shotgunshot, x, y)
+			fmod_studio_event_instance_oneshot_3d("event:/sfx/player/shotgunshot", x, y)
 			with create_effect(x, y, spr_guneffect)
 			    image_xscale = other.xscale
 			state = states.shotgunshoot
@@ -132,7 +132,6 @@ function do_taunt()
 		}
 	}
 }
-
 function player_sounds()
 {	
 	my_3d_attributes.position.x = x
@@ -283,7 +282,7 @@ function do_hurt(obj = noone)
 					spr_sausagecollect, 
 					spr_pineapplecollect
 				)
-			
+				
 				with create_debris(x, y, spr)
 				{
 					hsp = random_range(-10, 10)

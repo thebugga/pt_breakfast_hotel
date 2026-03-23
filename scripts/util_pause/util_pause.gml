@@ -1,3 +1,4 @@
+
 function make_pause_image()
 {
 	var surface = surface_create(screen_w, screen_h)
@@ -30,6 +31,14 @@ function do_unpause()
 	{
 		fmod_studio_bus_set_paused(buses[i], false)
 	}
+	instance_activate_all()
+	audio_resume_all()
+    
+    if (sprite_exists(pause_image))
+    {
+        sprite_delete(pause_image);
+    }
+    
 	with obj_music
 	{
 		if (global.secret && secret_mu_to_play != noone)

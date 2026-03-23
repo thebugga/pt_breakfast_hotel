@@ -26,9 +26,11 @@ if (place_meeting(x, y, obj_player) && scr_can_enter_door(obj_player.state) && k
 			room: room
 		}
 	}
-	
-	if obj_music.mu != noone
-		audio_sound_gain(obj_music.mu, 0, 2000)
+	with(obj_music)
+	{		
+		fmod_studio_event_instance_release(mu)
+		fmod_studio_event_instance_stop(mu, FMOD_STUDIO_STOP_MODE.ALLOWFADEOUT);
+	}
 }
 
 var flick = false

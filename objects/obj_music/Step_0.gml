@@ -46,26 +46,24 @@ if isPanic
 		fmod_studio_event_instance_stop(mu, FMOD_STUDIO_STOP_MODE.ALLOWFADEOUT);
 		fmod_studio_event_instance_stop(pillar_mu, FMOD_STUDIO_STOP_MODE.ALLOWFADEOUT);
 		mu = noone
-		var _panic_event_ref = fmod_studio_system_get_event("event:/music/pizzatime")
+		var _panic_event_ref = fmod_studio_system_get_event("event:/music/riseandshine")
 		panic_mu = fmod_studio_event_description_create_instance(_panic_event_ref)
 		fmod_studio_event_instance_start(panic_mu)
 	}
 	
 	if global.panic.timer < pinch_point && !pinch_init && !lap2
 	{
-		fmod_studio_event_instance_set_parameter_by_name(panic_mu, "pinch", true)
+		fmod_studio_event_instance_set_parameter_by_name(panic_mu, "state", 1)
 		pinch_init = true
 	}
 	
 	if global.laps == 1
 	{
-		var _panic_event_ref = fmod_studio_system_get_event("event:/music/lap2")
-		panic_mu = fmod_studio_event_description_create_instance(_panic_event_ref)
+		fmod_studio_event_instance_set_parameter_by_name(panic_mu, "state", 2)
 	}
 	
 	if global.laps >= 2
 	{
-		var _panic_event_ref = fmod_studio_system_get_event("event:/music/lap3")
-		panic_mu = fmod_studio_event_description_create_instance(_panic_event_ref)
+		fmod_studio_event_instance_set_parameter_by_name(panic_mu, "state", 3)
 	}
 }

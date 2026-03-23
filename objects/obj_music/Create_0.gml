@@ -8,7 +8,7 @@ RoomMusic = function(_room, _song, _secretmusic = "event:/music/entrancesecret")
 levelsongs = 
 [
 	new RoomMusic(tower_1, "event:/music/hub"),
-	new RoomMusic(entrance_1, "event:/music/entrance", "event:/music/entrancesecret"),
+	new RoomMusic(entrance_1, "event:/music/World1/kitchen", "event:/music/World1/kitchensecret"),
 	new RoomMusic(boss_test, "event:/music/pepperman")
 ]
 

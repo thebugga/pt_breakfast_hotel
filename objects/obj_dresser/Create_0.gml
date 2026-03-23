@@ -25,8 +25,8 @@ clothes_arr[characters.peppino] = [
 	new make_clothes_inst("13",					"Donating to the poor, how sweet!",								13),
 	new make_clothes_inst("14",					"Donating to the poor, how sweet!",								14),
 	new make_clothes_inst("15",					"Donating to the poor, how sweet!",								15),
-	new make_clothes_inst("16",					"Donating to the poor, how sweet!",								16),
-	new make_clothes_inst("17",					"Donating to the poor, how sweet!",								17),
+	new make_clothes_inst("Arts n Crafts",		"Funny Sock",													16),
+	new make_clothes_inst("Gegged",				"This Gal Gegs It!",											17),
 	new make_clothes_inst("18",					"Donating to the poor, how sweet!",								18)
 ]
 

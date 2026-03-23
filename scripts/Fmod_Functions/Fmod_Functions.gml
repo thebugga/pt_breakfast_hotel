@@ -2718,7 +2718,7 @@ function fmod_studio_system_get_parameter_description_list()
 }
 
 function FmodStudioAdvancedSettings() constructor {
-	command_queue_size = 32768;
+	command_queue_size = 32754;
 	handle_initial_size = 8192 * 8;
 	studio_update_period = 20;
 	idle_sampledata_pool_size = 262144;

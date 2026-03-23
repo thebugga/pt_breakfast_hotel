@@ -37,5 +37,5 @@
     "path":"sprites/spr_pizzatime/spr_pizzatime.yy",
   },
   "spriteMaskId":null,
-  "visible":true,
+  "visible":false,
 }

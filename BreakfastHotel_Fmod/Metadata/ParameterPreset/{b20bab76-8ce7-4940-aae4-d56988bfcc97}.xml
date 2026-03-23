@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="ParameterPreset" id="{b20bab76-8ce7-4940-aae4-d56988bfcc97}">
+		<property name="name">
+			<value>risenshine_index</value>
+		</property>
+		<relationship name="folder">
+			<destination>{3946a767-4bcd-4621-bebd-c40fcda4d929}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{c3efd2d0-ec8d-4b48-bcf6-06b698f2f1e9}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{c3efd2d0-ec8d-4b48-bcf6-06b698f2f1e9}">
+		<property name="parameterType">
+			<value>1</value>
+		</property>
+		<property name="maximum">
+			<value>2</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

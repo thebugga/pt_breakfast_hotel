@@ -7,12 +7,12 @@ depth = -8
 rank_score = 0
 rank_ix = 0
 rank_data = [
-	{sprite: asset_player_get("D", obj_player.charletter, "spr_rank"), song: mu_rankd},
-	{sprite: asset_player_get("C", obj_player.charletter, "spr_rank"), song: mu_rankc},
-	{sprite: asset_player_get("B", obj_player.charletter, "spr_rank"), song: mu_rankb},
-	{sprite: asset_player_get("A", obj_player.charletter, "spr_rank"), song: mu_ranka},
-	{sprite: asset_player_get("S", obj_player.charletter, "spr_rank"), song: mu_ranks},
-	{sprite: asset_player_get("P", obj_player.charletter, "spr_rank"), song: mu_rankp}
+	{sprite: asset_player_get("D", obj_player.charletter, "spr_rank")},
+	{sprite: asset_player_get("C", obj_player.charletter, "spr_rank")},
+	{sprite: asset_player_get("B", obj_player.charletter, "spr_rank")},
+	{sprite: asset_player_get("A", obj_player.charletter, "spr_rank")},
+	{sprite: asset_player_get("S", obj_player.charletter, "spr_rank")},
+	{sprite: asset_player_get("P", obj_player.charletter, "spr_rank")}
 ]
 
 sprite_index = obj_player.spr_player_lookdoor
