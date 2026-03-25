@@ -190,6 +190,19 @@ function do_enemy_generics()
 				particle_create(x, y, particles.stars)
 			fmod_studio_event_instance_oneshot_3d("event:/sfx/misc/enemybump", x, y)
 		}
+		else if obj_player.state == states.tacklecharge
+		{	
+			if scr_hitwall(x + hsp, y) && alarm[0] == -1 && obj_player.hitstun <= 0
+			{
+				shake_camera()
+				fmod_studio_event_instance_oneshot_3d("event:/sfx/misc/punch", x, y)
+		
+				obj_player.hitstun = 8
+				obj_player.prev_ix = obj_player.image_index
+				sprite_index = sprs.dead
+				alarm[0] = 30
+			}
+		}
 		with obj_player
 		{
 			if state == states.grab && other.state != states.hit && other.alarm[0] == -1 //alarm == -1 means not hitstunned

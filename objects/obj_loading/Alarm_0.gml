@@ -33,4 +33,4 @@ else if (currentsndgroup < array_length(bank_arr))
 	alarm[0] = 1
 }
 else
-	room_goto(logo_credits)
+	room_goto(init_objs_room)

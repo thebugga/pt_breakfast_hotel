@@ -3,6 +3,7 @@ yscale = 1
 if (obj_player.state != states.hold && 
 	obj_player.state != states.piledriver && 
 	obj_player.state != states.punchenemy &&
+	obj_player.state != states.tacklecharge &&
 	obj_player.state != states.swingding)
 	follow_player = false
 
@@ -74,6 +75,10 @@ if follow_player
 						}
 					}
 				}
+				break;
+			case states.tacklecharge:
+				other.x = x + xscale * 15
+				other.y = y - 20
 				break;
 			case states.swingding:
 				other.x = x

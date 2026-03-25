@@ -1,1 +1,1 @@
-do_fade(tower_1, "a", fade_types.generic)
+do_fade(hotel_placeholder, "a", fade_types.generic)

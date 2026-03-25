@@ -11,7 +11,7 @@ if ini_read_real(bn, "rank", 0) < player.hp - 1
 
 ini_close()
 
-room_goto(tower_1)
+room_goto(hotel_placeholder)
 reset_level()
 scr_resetcheckpoints()
 

@@ -1,4 +1,4 @@
-room_goto(tower_1)
+room_goto(hotel_placeholder)
 reset_level()
 scr_resetcheckpoints()
 

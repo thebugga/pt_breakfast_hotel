@@ -1,1 +1,1 @@
-room_goto(mainmenu)
+room_goto(logo_credits)

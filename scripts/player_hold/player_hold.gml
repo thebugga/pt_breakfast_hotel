@@ -28,6 +28,13 @@ function player_hold()
 		}
 	}
 	
+	if (input.dash.check)
+	{
+	    state = states.tacklecharge;
+	    sprite_index = spr_player_charge;
+		particle_create(x, y, particles.genericpoof, xscale, 1, spr_jumpdust)		
+	}
+
 	if (coyote_time && input_buffers.jump > 0)
 	{
 		input_buffers.jump = 0

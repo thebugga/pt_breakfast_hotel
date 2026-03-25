@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"fmod_studio_event_instance_create",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"fmod_studio_event_instance_create",
+  "parent":{
+    "name":"FMOD",
+    "path":"folders/FMOD.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

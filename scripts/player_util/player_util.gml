@@ -298,7 +298,7 @@ function do_hurt(obj = noone)
 			var _name = "Peppino"
 			with obj_tv
 				tv_expression(asset_get_index($"spr_tv_bighurt{irandom_range(1, 10)}"))
-			do_tip($"\{s}You've hurt {_name} {global.hurtcounter} Times...")
+			do_tip($"\{s}You've hurt {_name} {global.hurtcounter} Times...") //kys
 		}
 		else
 		{
@@ -528,6 +528,7 @@ function asset_player_reset(_letter)
 	spr_player_walljumpstart = asset_player_get("walljumpstart", _letter)
 	spr_player_wallsplat = asset_player_get("wallsplat", _letter)
 	spr_player_winding = asset_player_get("winding", _letter)
+	spr_player_charge = asset_player_get("charge", _letter)
 	pal_spr = asset_get_index("pal_player" + _letter)
 	pattern_colors = asset_get_index("pal_playerpattenrcolors" + _letter)
 	

@@ -34,6 +34,7 @@ enum states
 	divebomb,
 	wallbounce,
 	crusher,
+	tacklecharge,
 	
 	//enemy states
 	hit,
