@@ -35,6 +35,12 @@ enum states
 	wallbounce,
 	crusher,
 	tacklecharge,
+	ratmount,
+	ratmountjump,
+	ratmountskid,
+	ratmountattack,
+	ratmountspit,
+	ratmounttumble,
 	
 	//enemy states
 	hit,

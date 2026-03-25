@@ -34,7 +34,7 @@ global.checkpointsaveroom = ds_list_create();
 player_states = [];
 
 player_states[states.taunt] = player_taunt;
-player_states[states.normal] = player_normal;
+player_states[states.normal] = player_ratmount;
 player_states[states.jump] = player_jump;
 player_states[states.mach2] = player_mach2;
 player_states[states.mach3] = player_mach3;
@@ -100,6 +100,9 @@ mach4mode = false
 wallspeed = 0
 wallbouncedampen = 0
 flash = 0
+holding = false
+brick = false
+gusdashpadbuffer = 0
 
 aftimg_timers = {
 	mach: {timer: 0, effect: after_images.mach, resetpoint: 5, do_it: false},

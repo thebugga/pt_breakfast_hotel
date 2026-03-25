@@ -27,7 +27,7 @@ if follow_player
 {
 	hsp = 0
 	vsp = 0
-	with (obj_player)
+	with (follow_player)
 	{
 		switch (state)
 		{

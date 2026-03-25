@@ -207,7 +207,7 @@ function do_enemy_generics()
 		{
 			if state == states.grab && other.state != states.hit && other.alarm[0] == -1 //alarm == -1 means not hitstunned
 			{
-				other.follow_player = true
+				other.follow_player = id
 				other.sprite_index = other.sprs.stun
 				reset_anim(spr_player_haulingrise)
 				state = states.hold

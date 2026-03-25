@@ -29,6 +29,13 @@ if !pausestopframe
 else
 	pausestopframe = false
 	
+holding = false
+with par_enemy
+{
+	if follow_player == other.id
+		holding = true
+}
+
 struct_foreach(aftimg_timers, function(_name, _data)
 {
 	_data.do_it = false
