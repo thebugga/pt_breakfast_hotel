@@ -30,7 +30,7 @@ function player_climbwall()
 		else if (wallspeed >= 12)
 		{
 			flash = 8
-			state = states.mach3
+			state = states.normal
 			sprite_index = spr_player_mach3
 			movespeed = wallspeed
 		}

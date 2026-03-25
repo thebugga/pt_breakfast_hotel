@@ -35,7 +35,8 @@ player_states = [];
 
 player_states[states.taunt] = player_taunt;
 player_states[states.normal] = player_ratmount;
-player_states[states.jump] = player_jump;
+player_states[states.jump] = player_jump
+player_states[states.slide] = player_slide;
 player_states[states.mach2] = player_mach2;
 player_states[states.mach3] = player_mach3;
 player_states[states.tumble] = player_tumble;
@@ -218,6 +219,8 @@ winding = 0
 
 prev_g_room = 0
 prev_g_door = "a"
+
+prevspr = sprite_index
 
 uparrow = {
 	yoffset: -50,

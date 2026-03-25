@@ -6,23 +6,22 @@ function player_slide()
 	sprite_index = spr_player_machslideboost3;
 	if (abs(movespeed) <= 0 || abs(hsp) <= 0)
 	{
-		xscale *= -1
 		if !input.dash.check
 		{
 			state = states.normal
 		}
 		else
 		{	
-			if prevstate == states.mach3
+			if prevspr == spr_player_mach3
 			{
-				state = states.mach3
+				state = states.normal
 				movespeed = 10
 				sprite_index = spr_player_mach3
 				prevstate = state
 			}
 			else
 			{
-				state = states.mach2
+				state = states.normal
 				movespeed = 8
 				prevstate = state
 			}

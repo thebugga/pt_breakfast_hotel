@@ -62,7 +62,7 @@ function player_tumble() //ball is in its own state, player_ball()
 		if input.dash.check
 		{
 			if movespeed >= 12
-				state = states.mach3
+				state = states.normal
 			else
 				state = states.mach2
 			reset_anim(spr_player_rollgetup)

@@ -1,132 +1,86 @@
+
 function player_jump()
 {
-	var default_jump = spr_player_jump
-	var default_fall = spr_player_fall
-	var default_land = spr_player_land
-	var default_landmove = spr_player_landmove
+    image_speed = 0.35;
+    hsp = movespeed;
+    
+    if (scr_hitwall(x + hsp, y, obj_solid) && gustavodash != 51)
+    {
+        movespeed = 0;
+        
+        if (movespeed >= 12)
+        {
+            state = states.bump;
+            sprite_index = spr_player_wallsplat;
+            image_index = 0;
+            create_effect(x + (16 * xscale), y, spr_bumpeffect);
+            hsp = -xscale * 4;
+            vsp = -5;
+            exit;
+        }
+    }
+    
+    if (!input.dash.check)
+    {
+        if (p_move != 0)
+        {
+            if (p_move == xscale)
+                movespeed = lerp(movespeed, xscale * 8, 0.05);
+            else
+                movespeed = lerp(movespeed, 0, 0.05);
+        }
+        else
+        {
+            movespeed = lerp(movespeed, 0, 0.05);
+        }
+    }
+    else
+    {
+        movespeed = lerp(movespeed, xscale * 12, 0.015);
+    }
 	
-	if has_shotgun
-	{
-		default_jump = spr_player_shotgun_jump
-		default_fall = spr_player_shotgun_fall
-		default_land = spr_player_shotgun_land
-		default_landmove = spr_player_shotgun_land
-	}
-	
-	if sprite_index == spr_player_jump
-		sprite_index = default_jump
-	else if sprite_index == spr_player_fall
-		sprite_index = default_fall
-	
-	if (coyote_time && input_buffers.jump > 0)
-	{
-		input_buffers.jump = 0
-		vsp = -11
-		reset_anim(default_jump)
-		jumpstop = false
-		create_effect(x, y - 5, spr_highjumpcloud2)
-		fmod_studio_event_instance_oneshot_3d("event:/sfx/player/jump", x, y)
-	}
-	
-	hsp = movespeed * xscale
-	
-	if p_move == -xscale || movespeed >= 0
-		momentum = false
-	
-	if (p_move != 0)
-	{
-		movespeed = approach(movespeed, 6, 0.5)
-		xscale = p_move
-		if dir != xscale
-		{
-			movespeed = 0
-			dir = xscale
-		}
-	}
-	else if momentum
-		movespeed = approach(movespeed, 0, 0.5)
-	else if (p_move == 0)
-		movespeed = 0
-		
-	if movespeed >= 0
-		momentum = false
-	
-	if place_meeting(x + hsp, y, obj_solid)
-		movespeed = 0
-	
-	if (!jumpstop && !input.jump.check && vsp < 0)
-	{
-		jumpstop = true
-		vsp /= 10
-	}
-	
-	if vsp >= 0
-	{
-		fallingtimer = min(fallingtimer + 1, 100)
-		if fallingtimer >= 50
-			sprite_index = fallingtimer < 100 ? spr_player_fallface : spr_player_freefall
-	}
-	else
-		fallingtimer = 0
-	
-	if (grounded && vsp >= 0)
-	{
-		if fallingtimer < 50
-		{
-			state = states.normal
-			reset_anim(movespeed < 1 ? default_land : default_landmove)
-			fmod_studio_event_instance_oneshot_3d("event:/sfx/player/step", x, y)
-			create_effect(x, y, spr_landeffect)
-			if input.dash.check
-			{
-				state = states.mach2
-				movespeed = max(movespeed, 6);
-				reset_anim(spr_player_mach1)
-			}
-		}
-		else
-		{
-			reset_anim(sprite_index == spr_player_fallface ? spr_player_bodyslamland : spr_player_freefallland)
-			image_index = 0
-			state = states.bump
-			shake_camera()
-			fmod_studio_event_instance_oneshot_3d("event:/sfx/misc/slam", x, y)
-			create_effect(x, y + 2, spr_groundpoundeffect)
-		}
-	}
-	
-	if has_shotgun //do before if you have the shotgun
-		do_groundpound()
-	
-	if sprite_index != spr_player_suplexbump
-		do_grab()
-	
-	if !has_shotgun //do after if you dont have the shotgun
-		do_groundpound()
-	
-	image_speed = 0.35
-	switch (sprite_index)
-	{
-		case spr_player_jump:
-		case spr_player_piledriverjump:
-			reset_anim_on_end(spr_player_fall)
-			break;
-		case spr_player_suplexcancel:
-			image_speed = 0.4
-			reset_anim_on_end(spr_player_fall)
-			break;
-		case spr_player_shotgun_jump:
-			reset_anim_on_end(spr_player_shotgun_fall)
-			break;
-		case spr_player_stomp:
-			if anim_ended()
-				image_index = image_number - 3
-			break;
-		case spr_player_hurtjump:
-			if anim_ended()
-				image_index = image_number - 3
-			break;
-	}
-	
-	do_taunt()
+    if (anim_ended())
+    {
+        switch (sprite_index)
+        {
+            case spr_player_jump:
+                sprite_index = spr_player_fall;
+                break;
+        }
+    }
+    
+    if (grounded && vsp > 0)
+    {
+        sprite_index = spr_player_land;
+        state = states.normal;
+    }
+    
+    if ((!grounded || scr_slope(x, y + 1)) && scr_hitwall(x + xscale, y) && movespeed >= 6 && !place_meeting(x + xscale, y, obj_destroyable) && !place_meeting(x + xscale, y, obj_destroyable_big) && !place_meeting(x + xscale, y, obj_metalblock))
+    {
+        if (character == characters.peppino)
+        {
+            wallspeed = movespeed;
+            
+            if (movespeed < 1)
+                wallspeed = 1;
+            else
+                movespeed = wallspeed;
+            
+            state = states.climbwall;
+        }
+        else if (character == characters.noise && !scr_goupwall())
+        {
+            movespeed = 0;
+            vsp = -17 + wallbouncedampen;
+            wallbouncedampen += 2.55;
+            state = states.wallbounce;
+            sprite_index = spr_playerN_wallbounce;
+            scr_sound_3d(sfx_N_wallkick, x, y);
+            particle_create(x, y, particles.noisebump);
+        }
+    }
+    
+    do_groundpound();
+    do_grab();
+    do_taunt();
 }

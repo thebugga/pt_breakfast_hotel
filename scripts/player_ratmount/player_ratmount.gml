@@ -1,21 +1,21 @@
 function player_ratmount()
 {
-	var default_idle = brick ? spr_player_ratidle : spr_player_idle
-	var default_move = brick ? spr_player_ratmove : spr_player_move
-	var default_jump = brick ? spr_player_ratjump : spr_player_jump
-	var default_fall = brick ? spr_player_ratfall : spr_player_fall
-	var default_bump = brick ? spr_player_ratbump : spr_player_bump
+	var default_idle = spr_player_idle
+	var default_move = spr_player_move
+	var default_jump = spr_player_jump
+	var default_fall = spr_player_fall
+	var default_bump = spr_player_bump
 	if (movespeed >= 12 || gusdashpadbuffer > 0)
 	{
-		default_move = brick ? spr_player_ratmach3 : spr_player_mach3
-		default_jump = brick ? spr_player_ratmach3jump : spr_player_mach3jump
-		default_fall = brick ? spr_player_ratmach3jump : spr_player_mach3jump
+		default_move = spr_player_mach3
+		default_jump = spr_player_mach3jump
+		default_fall = spr_player_mach3jump
 	}
     else if input.dash.check
 	{
-		default_move = brick ? spr_player_ratmach2 : spr_player_mach2
-		default_jump = brick ? spr_player_ratmach2jump : spr_player_mach2jump
-		default_fall = brick ? spr_player_ratmach2jump : spr_player_mach2jump
+		default_move = spr_player_mach2
+		default_jump = spr_player_mach2jump
+		default_fall = spr_player_mach2jump
 	}
 	if has_shotgun
 	{
@@ -50,6 +50,7 @@ function player_ratmount()
 			default_fall = spr_player_hurtjump
 		}
 	}
+	
 	
 	doublejump = false
 	//hsp = xscale * movespeed
@@ -87,21 +88,14 @@ function player_ratmount()
         particle_create(x, y, particles.genericpoof, xscale, 1, spr_jumpdust)
         gustavodash = 51
     }
-    if (movespeed >= 12 || gusdashpadbuffer > 0)
-    {
-        if !particle_contains_sprite(spr_mach3charge)
-		{
-			create_followingeffect(spr_mach3charge, states.mach3, xscale)
-			create_followingeffect(spr_speedlines, states.mach3, xscale)
-		}
-    }
-	if (p_move != xscale && p_move != 0 && gusdashpadbuffer <= 0 && sprite_index != spr_player_kick)
+	if (p_move != xscale && p_move != 0 && gusdashpadbuffer <= 0)
     {
         xscale = p_move
+		prevspr = sprite_index
         if (abs(movespeed) > 2 && abs(hsp) > 2 && grounded)
         {
             fmod_studio_event_instance_oneshot_3d("event:/sfx/player/break", x, y)
-            state = states.ratmountskid
+            state = states.slide
         }
     }
 	if (gusdashpadbuffer > 0 && hsp != 0)
@@ -118,7 +112,7 @@ function player_ratmount()
                 hsp = approach(hsp, 0, 0.5)
         }
         else
-            hsp = Approach(hsp, 0, 0.5)
+            hsp = approach(hsp, 0, 0.5)
     }
     else
     {
@@ -129,7 +123,7 @@ function player_ratmount()
         image_speed = abs(hsp) / 12
     else
         image_speed = 0.35
-    if (sprite_index == spr_player_ratmountmach3)
+    if (sprite_index == spr_player_mach3)
         image_speed = 0.5
 		
     var front = scr_hitwall(x + xscale, y) && !scr_slope(x + xscale, y)
@@ -146,7 +140,7 @@ function player_ratmount()
     {
 		if hsp != 0
 		{
-			if (sprite_index != (brick ? spr_player_ratlandmove : spr_player_landmove) && sprite_index != spr_player_shotgun_land)
+			if (sprite_index != spr_player_landmove && sprite_index != spr_player_shotgun_land)
 				sprite_index = default_move
 		}
 		else
@@ -168,7 +162,7 @@ function player_ratmount()
 				}
 			}
 			
-			if (sprite_index != spr_player_machslideend && sprite_index != (brick ? spr_player_ratland : spr_player_land) && sprite_index != spr_player_bodyslamland && sprite_index != spr_player_facehurt && sprite_index != spr_player_shotgun_land && idletimer > 0)
+			if (sprite_index != spr_player_machslideend && sprite_index != (spr_player_land) && sprite_index != spr_player_bodyslamland && sprite_index != spr_player_facehurt && sprite_index != spr_player_shotgun_land && idletimer > 0)
 				sprite_index = default_idle
 		}
     }
@@ -209,35 +203,56 @@ function player_ratmount()
             fmod_studio_event_instance_oneshot_3d("event:/sfx/player/step", x, y)
         }
     }
-	if (input_buffers.jump > 0 && coyote_time && gusdashpadbuffer == 0 && state != states.ratmountskid)
+	if (input_buffers.jump > 0 && coyote_time && gusdashpadbuffer == 0 && state != states.slide)
     {
         input_buffers.jump = 0
 		fmod_studio_event_instance_oneshot_3d("event:/sfx/player/jump", x, y)
 		particle_create(x, y, particles.genericpoof, xscale, 1, spr_jumpdust)
         sprite_index = default_jump
         image_index = 0
-        state = states.ratmountjump
+        state = states.jump
+		movespeed = prevMS
         vsp = -11
         jumpstop = false
     }
-	if (!grounded && sprite_index != spr_player_ratmountswallow)
-    {
-        state = states.ratmountjump
-		sprite_index = default_fall
-    }
-    if (key_attack && grounded && (!(place_meeting((x + xscale), y, obj_solid))))
+    if (input.dash.check && grounded && (!(place_meeting((x + xscale), y, obj_solid))))
     {
         if (movespeed < 12)
             movespeed = approach(movespeed, 12, 0.15)
     }
+    if ((!grounded || scr_slope(x, y + 1)) && scr_hitwall(x + xscale, y) && movespeed >= 6)
+    {
+        if (character == characters.peppino)
+        {
+            wallspeed = movespeed;
+            
+            if (movespeed < 1)
+                wallspeed = 1;
+            else
+                movespeed = wallspeed;
+            
+            state = states.climbwall;
+        }
+        else if (character == characters.noise && !scr_goupwall())
+        {
+            movespeed = 0;
+            vsp = -17 + wallbouncedampen;
+            wallbouncedampen += 2.55;
+            state = states.wallbounce;
+            sprite_index = spr_playerN_wallbounce;
+            scr_sound_3d(sfx_N_wallkick, x, y);
+            particle_create(x, y, particles.noisebump);
+        }
+    }
+	if (state == states.slide)
+	    hsp *= -1
+	/*
     if input_buffers.grab > 0 && gusdashpadbuffer == 0
     {
 	    input_buffers.grab = 0
 	    if key_up && !instance_exists(obj_brickball)
 		{
 	        kickbrick()
-	        if (state == states.ratmountskid)
-	            hsp *= -1
 		}
 		else
 	    {
@@ -259,7 +274,8 @@ function player_ratmount()
 	            particle_create(x, y, particles.genericpoof, xscale, 1, spr_jumpdust)
 	        }
 	    }
-	}
+	} 
+	*/
 	if !particle_contains_sprite(spr_crazyruneffect) && grounded && movespeed >= 12
 	{
 		with create_effect(x, y, spr_crazyruneffect)
@@ -279,17 +295,32 @@ function player_ratmount()
 	            image_speed = 0.6;
 			break;
 		case spr_player_machslideend:
-		case spr_player_ratland:
 		case spr_player_land:
 		case spr_player_shotgun_land:
 		case spr_player_facehurt:
 			reset_anim_on_end(default_idle)
 			break;
-		case spr_player_ratlandmove:
 		case spr_player_landmove:
 			reset_anim_on_end(default_move);
 			break;
 	}
     //shootpowerup()
+    if (movespeed >= 12)
+    {
+        if (!particle_contains_sprite(spr_mach3charge))
+        {
+            create_followingeffect(spr_mach3charge, states.normal, xscale);
+            create_followingeffect(spr_speedlines, states.normal, xscale);
+        }
+        
+        if ((input.up.check || input.superjump.check) && vsp >= 0)
+        {
+            state = states.superjump;
+            reset_anim(spr_player_superjumpprep);
+        }
+        
+        instakill = true;
+    }
+    do_grab();
     do_taunt()
 }

@@ -40,7 +40,7 @@ function player_mach2()
 		{
 			if (sprite_index != spr_player_rollgetup)
 				sprite_index = spr_player_mach3
-			state = states.mach3
+			state = states.normal
 			flash = 8
 		}
 		if particle_timer <= 0
