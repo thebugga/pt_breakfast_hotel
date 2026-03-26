@@ -67,6 +67,47 @@ function do_grab()
 		}
 	}
 }
+function do_ratattack()
+{
+	if input_buffers.grab > 0 && gusdashpadbuffer == 0
+    {
+	    input_buffers.grab = 0
+	    if key_up && brick && !instance_exists(obj_brickball)
+		{
+	        kickbrick()
+			brick = false
+	        if (state == states.ratmountskid)
+	            hsp *= -1
+		}
+		else
+	    {
+	        if holding
+	        {
+	            state = states.ratmountspit
+	            sprite_index = spr_player_ratspit
+	            image_index = 0
+	        }
+	        else
+	        {
+				if brick
+		        {
+					brick = false
+		            with (instance_create(x, y, obj_brickcomeback))
+		                wait = true
+		        }
+	            state = states.ratmountattack
+	            image_index = 0
+	            if (p_move != 0)
+	                xscale = p_move
+	            movespeed = 12
+	            sprite_index = spr_player_ratattack
+	            fmod_studio_event_instance_oneshot_3d("event:/sfx/player/jump", x, y)
+	            particle_create(x, y, particles.genericpoof, xscale, 1, spr_jumpdust)
+	        }
+	    }
+	}
+}
+
 
 function do_taunt()
 {
@@ -445,6 +486,7 @@ function asset_player_reset(_letter)
 	spr_player_hurtmove = asset_player_get("hurtmove", _letter)
 	spr_player_jump = asset_player_get("jump", _letter)
 	spr_player_keyget = asset_player_get("keyget", _letter)
+	spr_player_kick = asset_player_get("finishingblow2", _letter)
 	spr_player_kungfu1 = asset_player_get("kungfu1", _letter)
 	spr_player_kungfu2 = asset_player_get("kungfu2", _letter)
 	spr_player_kungfu3 = asset_player_get("kungfu3", _letter)
@@ -481,6 +523,9 @@ function asset_player_reset(_letter)
 	spr_player_poundcancel1 = asset_player_get("poundcancel1", _letter)
 	spr_player_poundcancel2 = asset_player_get("poundcancel2", _letter)
 	spr_player_presentboxspring = asset_player_get("presentboxspring", _letter)
+	spr_player_ratland = asset_player_get("land", _letter)
+	spr_player_ratlandmove = asset_player_get("landmove", _letter)
+	spr_player_ratswallow = asset_player_get("land", _letter)
 	spr_player_rockethitwall = asset_player_get("rockethitwall", _letter)
 	spr_player_rollgetup = asset_player_get("rollgetup", _letter)
 	spr_player_scared = asset_player_get("scared", _letter)
@@ -501,6 +546,7 @@ function asset_player_reset(_letter)
 	spr_player_shotgun_shootdownland = asset_player_get("shotgun_shootdownland", _letter)
 	spr_player_Sjumpcancel = asset_player_get("Sjumpcancel", _letter)
 	spr_player_Sjumpcancelstart = asset_player_get("Sjumpcancelstart", _letter)
+	spr_player_skid = asset_player_get("machslideboost", _letter)
 	spr_player_slipbanana1 = asset_player_get("slipbanana1", _letter)
 	spr_player_slipbanana2 = asset_player_get("slipbanana2", _letter)
 	spr_player_stomp = asset_player_get("stomp", _letter)

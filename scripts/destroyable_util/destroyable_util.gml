@@ -53,9 +53,6 @@ function break_destroyables()
 	
 	if sprite_index == obj_player.spr_player_machslidestart || sprite_index == obj_player.spr_player_machslideend
 		is_h_state = true
-		
-	if sprite_index == obj_player.spr_player_mach3 || sprite_index == obj_player.spr_player_mach2 || sprite_index == obj_player.spr_player_mach2jump || sprite_index == obj_player.spr_player_mach3jump
-		is_h_state = true
 	
 	if state == states.superjump && sprite_index == obj_player.spr_player_superjump
 		is_v_state = true

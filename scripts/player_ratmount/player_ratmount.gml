@@ -1,21 +1,20 @@
 function player_ratmount()
 {
-	var default_idle = spr_player_idle
-	var default_move = spr_player_move
-	var default_jump = spr_player_jump
-	var default_fall = spr_player_fall
-	var default_bump = spr_player_bump
+	var default_idle = brick ? spr_player_ratidle : spr_player_idle
+	var default_move = brick ? spr_player_ratmove : spr_player_move
+	var default_jump = brick ? spr_player_ratjump : spr_player_jump
+	var default_fall = brick ? spr_player_ratfall : spr_player_fall
 	if (movespeed >= 12 || gusdashpadbuffer > 0)
 	{
-		default_move = spr_player_mach3
-		default_jump = spr_player_mach3jump
-		default_fall = spr_player_mach3jump
+		default_move = brick ? spr_player_ratmach3 : spr_player_mach3
+		default_jump = brick ? spr_player_ratmach3jump : spr_player_mach3jump
+		default_fall = brick ? spr_player_ratmach3jump : spr_player_mach3jump
 	}
     else if input.dash.check
 	{
-		default_move = spr_player_mach2
-		default_jump = spr_player_mach2jump
-		default_fall = spr_player_mach2jump
+		default_move = brick ? spr_player_ratmach2 : spr_player_mach2
+		default_jump = brick ? spr_player_ratmach2jump : spr_player_mach2jump
+		default_fall = brick ? spr_player_ratmach2jump : spr_player_mach2jump
 	}
 	if has_shotgun
 	{
@@ -51,18 +50,15 @@ function player_ratmount()
 		}
 	}
 	
-	
 	doublejump = false
-	//hsp = xscale * movespeed
+	hsp = xscale * movespeed
+	if scr_hitwall(x + xscale, y) || (movespeed < 8 && p_move != xscale) || !input.dash.check || movespeed <= 6
+		gustavodash = 8
+    if (input.dash.check && grounded && (!(place_meeting((x + xscale), y, obj_solid))))
+            gustavodash = approach(gustavodash, 12, 0.15)
 	var prevMS = movespeed
 	
-	if scr_hitwall(x + xscale, y) || (movespeed < 8 && p_move != xscale) || !input.dash.check || movespeed <= 6
-	{
-		gustavodash = 0
-		movespeed = 8
-	}
-	
-	if scr_hitwall(x + xscale, y) && !scr_slope(x, y + 1) && scr_slope(x, y + 1) && gustavodash != 51
+	if scr_hitwall(x + xscale, y) && !scr_slope(x, y + 1) && scr_slope(x, y + 1)
 	{
 		hsp = 0
 		if (prevMS >= 12)
@@ -73,7 +69,7 @@ function player_ratmount()
             {
                 fmod_studio_event_instance_oneshot_3d("event:/sfx/misc/slam", x, y)
                 state = states.bump
-                sprite_index = default_bump
+                sprite_index = brick ? spr_player_ratbump : spr_player_bump
                 image_index = 0
                 create_effect(x, y, spr_bumpeffect)
                 hsp = -xscale * 4
@@ -83,48 +79,48 @@ function player_ratmount()
             }
         }
 	}
-	if (movespeed >= 12 && gustavodash != 51)
-    {
+    if (movespeed >= 12 && !particle_contains_sprite(spr_jumpdust))
         particle_create(x, y, particles.genericpoof, xscale, 1, spr_jumpdust)
-        gustavodash = 51
-    }
-	if (p_move != xscale && p_move != 0 && gusdashpadbuffer <= 0)
+		
+    if (movespeed >= 12 || gusdashpadbuffer > 0)
     {
-        xscale = p_move
-		prevspr = sprite_index
-        if (abs(movespeed) > 2 && abs(hsp) > 2 && grounded)
+        if !particle_contains_sprite(spr_mach3charge)
+		{
+			create_followingeffect(spr_mach3charge, states.mach3, xscale)
+			create_followingeffect(spr_speedlines, states.mach3, xscale)
+		}
+    }
+	if (p_move == -xscale && gusdashpadbuffer <= 0 && sprite_index != spr_player_kick)
+    {
+        if (movespeed > 2 && grounded)
         {
             fmod_studio_event_instance_oneshot_3d("event:/sfx/player/break", x, y)
-            state = states.slide
+            state = states.ratmountskid
         }
+		else
+			xscale = p_move
     }
+	
 	if (gusdashpadbuffer > 0 && hsp != 0)
         xscale = sign(hsp)
     if (gusdashpadbuffer > 0)
         gusdashpadbuffer--
     if (gusdashpadbuffer <= 0)
     {
-        if (p_move != 0)
-        {
-            if (p_move == xscale)
-                hsp = approach(hsp, (xscale * movespeed), 0.5)
-            else
-                hsp = approach(hsp, 0, 0.5)
-        }
+	    if (p_move == xscale)
+            movespeed = approach(movespeed, gustavodash, 0.5)
         else
-            hsp = approach(hsp, 0, 0.5)
+            movespeed = approach(movespeed, 0, 0.5)
     }
     else
-    {
         movespeed = 12
-        hsp = xscale * movespeed
-    }
-	if (abs(hsp) > 2)
-        image_speed = abs(hsp) / 12
-    else
-        image_speed = 0.35
-    if (sprite_index == spr_player_mach3)
-        image_speed = 0.5
+	
+	//if (abs(hsp) > 2)
+    //    image_speed = abs(hsp) / 12
+    //else
+    //    image_speed = 0.35
+    //if (sprite_index == spr_player_ratmountmach3)
+    //    image_speed = 0.5
 		
     var front = scr_hitwall(x + xscale, y) && !scr_slope(x + xscale, y)
 	var idlegestures = [
@@ -140,7 +136,7 @@ function player_ratmount()
     {
 		if hsp != 0
 		{
-			if (sprite_index != spr_player_landmove && sprite_index != spr_player_shotgun_land)
+			if (sprite_index != (brick ? spr_player_ratlandmove : spr_player_landmove) && sprite_index != spr_player_shotgun_land)
 				sprite_index = default_move
 		}
 		else
@@ -149,7 +145,7 @@ function player_ratmount()
 			{
 				if (idletimer <= 0 && idletimer != -4)
 				{
-					//reset_anim(idlegestures[irandom(5)])
+					reset_anim(idlegestures[irandom(5)])
 					idletimer = -4
 					if irandom(100) >= 50
 						scr_sound_pitched(choose(v_pep_bah, v_pep_alright, v_pep_alright_high, v_pep_paranoid, v_pep_paParanoid), 0.5, 1.5)
@@ -162,7 +158,7 @@ function player_ratmount()
 				}
 			}
 			
-			if (sprite_index != spr_player_machslideend && sprite_index != (spr_player_land) && sprite_index != spr_player_bodyslamland && sprite_index != spr_player_facehurt && sprite_index != spr_player_shotgun_land && idletimer > 0)
+			if (sprite_index != spr_player_machslideend && sprite_index != (brick ? spr_player_ratland : spr_player_land) && sprite_index != spr_player_bodyslamland && sprite_index != spr_player_facehurt && sprite_index != spr_player_shotgun_land && idletimer > 0)
 				sprite_index = default_idle
 		}
     }
@@ -203,79 +199,24 @@ function player_ratmount()
             fmod_studio_event_instance_oneshot_3d("event:/sfx/player/step", x, y)
         }
     }
-	if (input_buffers.jump > 0 && coyote_time && gusdashpadbuffer == 0 && state != states.slide)
+	if (input_buffers.jump > 0 && coyote_time && gusdashpadbuffer == 0 && state != states.ratmountskid)
     {
         input_buffers.jump = 0
 		fmod_studio_event_instance_oneshot_3d("event:/sfx/player/jump", x, y)
 		particle_create(x, y, particles.genericpoof, xscale, 1, spr_jumpdust)
-        sprite_index = default_jump
-        image_index = 0
-        state = states.jump
-		movespeed = prevMS
+		reset_anim(default_jump)
+        state = states.ratmountjump
         vsp = -11
         jumpstop = false
     }
-    if (input.dash.check && grounded && (!(place_meeting((x + xscale), y, obj_solid))))
+	if (!grounded && sprite_index != spr_player_ratswallow)
     {
-        if (movespeed < 12)
-            movespeed = approach(movespeed, 12, 0.15)
+        state = states.ratmountjump
+		sprite_index = default_fall
     }
-    if ((!grounded || scr_slope(x, y + 1)) && scr_hitwall(x + xscale, y) && movespeed >= 6)
-    {
-        if (character == characters.peppino)
-        {
-            wallspeed = movespeed;
-            
-            if (movespeed < 1)
-                wallspeed = 1;
-            else
-                movespeed = wallspeed;
-            
-            state = states.climbwall;
-        }
-        else if (character == characters.noise && !scr_goupwall())
-        {
-            movespeed = 0;
-            vsp = -17 + wallbouncedampen;
-            wallbouncedampen += 2.55;
-            state = states.wallbounce;
-            sprite_index = spr_playerN_wallbounce;
-            scr_sound_3d(sfx_N_wallkick, x, y);
-            particle_create(x, y, particles.noisebump);
-        }
-    }
-	if (state == states.slide)
-	    hsp *= -1
-	/*
-    if input_buffers.grab > 0 && gusdashpadbuffer == 0
-    {
-	    input_buffers.grab = 0
-	    if key_up && !instance_exists(obj_brickball)
-		{
-	        kickbrick()
-		}
-		else
-	    {
-	        if holding
-	        {
-	            state = states.ratmountspit
-	            sprite_index = spr_player_ratspit
-	            image_index = 0
-	        }
-	        else
-	        {
-	            state = states.ratmountattack
-	            image_index = 0
-	            if (p_move != 0)
-	                xscale = p_move
-	            movespeed = 12
-	            sprite_index = spr_player_ratattack
-	            fmod_studio_event_instance_oneshot_3d("event:/sfx/player/jump", x, y)
-	            particle_create(x, y, particles.genericpoof, xscale, 1, spr_jumpdust)
-	        }
-	    }
-	} 
-	*/
+	
+    do_ratattack()
+	
 	if !particle_contains_sprite(spr_crazyruneffect) && grounded && movespeed >= 12
 	{
 		with create_effect(x, y, spr_crazyruneffect)
@@ -295,32 +236,17 @@ function player_ratmount()
 	            image_speed = 0.6;
 			break;
 		case spr_player_machslideend:
+		case spr_player_ratland:
 		case spr_player_land:
 		case spr_player_shotgun_land:
 		case spr_player_facehurt:
 			reset_anim_on_end(default_idle)
 			break;
+		case spr_player_ratlandmove:
 		case spr_player_landmove:
 			reset_anim_on_end(default_move);
 			break;
 	}
     //shootpowerup()
-    if (movespeed >= 12)
-    {
-        if (!particle_contains_sprite(spr_mach3charge))
-        {
-            create_followingeffect(spr_mach3charge, states.normal, xscale);
-            create_followingeffect(spr_speedlines, states.normal, xscale);
-        }
-        
-        if ((input.up.check || input.superjump.check) && vsp >= 0)
-        {
-            state = states.superjump;
-            reset_anim(spr_player_superjumpprep);
-        }
-        
-        instakill = true;
-    }
-    do_grab();
     do_taunt()
 }

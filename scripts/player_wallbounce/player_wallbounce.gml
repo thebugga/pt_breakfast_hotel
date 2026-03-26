@@ -52,7 +52,7 @@ function player_wallbounce()
 		{
 			if p_move != 0
 				xscale = p_move
-			state = states.normal
+			state = states.mach3
 			movespeed = max(abs(movespeed), 12)
 			sprite_index = spr_player_mach3
 		}

@@ -49,7 +49,6 @@ function player_normal()
 	        {
 	            state = states.slide;
 	            sprite_index = spr_player_machslideboost3;
-				prevspr = sprite_index
 	            movespeed = abs(movespeed);
 	        }
 	    }
