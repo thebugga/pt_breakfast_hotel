@@ -249,4 +249,6 @@ function player_ratmount()
 	}
     //shootpowerup()
     do_taunt()
+	
+	instakill = movespeed >= 12
 }

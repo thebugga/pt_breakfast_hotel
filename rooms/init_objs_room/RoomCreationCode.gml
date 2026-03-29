@@ -36,6 +36,7 @@ enum states
 	crusher,
 	tacklecharge,
 	ratmount,
+	ratmountcrouch,
 	ratmountjump,
 	ratmountskid,
 	ratmountattack,

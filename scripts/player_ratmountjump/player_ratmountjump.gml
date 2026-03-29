@@ -155,5 +155,6 @@ function player_ratmountjump()
 		create_effect(x, y, spr_landeffect)
     }
 	
+	instakill = movespeed >= 12
     do_taunt()
 }

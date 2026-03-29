@@ -320,6 +320,7 @@
     {"name":"player_punchenemy","order":18,"path":"scripts/player_punchenemy/player_punchenemy.yy",},
     {"name":"player_punchstun","order":26,"path":"scripts/player_punchstun/player_punchstun.yy",},
     {"name":"player_ratmount","order":35,"path":"scripts/player_ratmount/player_ratmount.yy",},
+    {"name":"player_ratmountattack","order":38,"path":"scripts/player_ratmountattack/player_ratmountattack.yy",},
     {"name":"player_ratmountjump","order":37,"path":"scripts/player_ratmountjump/player_ratmountjump.yy",},
     {"name":"player_ratmountskid","order":36,"path":"scripts/player_ratmountskid/player_ratmountskid.yy",},
     {"name":"player_shotgunshoot","order":28,"path":"scripts/player_shotgunshoot/player_shotgunshoot.yy",},

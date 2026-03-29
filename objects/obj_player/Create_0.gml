@@ -37,6 +37,7 @@ player_states[states.taunt] = player_taunt;
 player_states[states.normal] = player_ratmount;
 player_states[states.ratmountskid] = player_ratmountskid;
 player_states[states.ratmountjump] = player_ratmountjump;
+player_states[states.ratmountattack] = player_ratmountattack;
 player_states[states.jump] = player_jump;
 player_states[states.mach2] = player_mach2;
 player_states[states.mach3] = player_mach3;
@@ -106,6 +107,8 @@ holding = false
 brick = false
 gusdashpadbuffer = 0
 gustavodash = 0
+punchtimer = 0
+Ghitwall = false
 
 aftimg_timers = {
 	mach: {timer: 0, effect: after_images.mach, resetpoint: 5, do_it: false},

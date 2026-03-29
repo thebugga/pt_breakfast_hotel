@@ -72,7 +72,7 @@ function do_ratattack()
 	if input_buffers.grab > 0 && gusdashpadbuffer == 0
     {
 	    input_buffers.grab = 0
-	    if key_up && brick && !instance_exists(obj_brickball)
+	    if input.up.check && brick
 		{
 	        kickbrick()
 			brick = false
@@ -95,14 +95,13 @@ function do_ratattack()
 		            with (instance_create(x, y, obj_brickcomeback))
 		                wait = true
 		        }
-	            state = states.ratmountattack
-	            image_index = 0
-	            if (p_move != 0)
-	                xscale = p_move
-	            movespeed = 12
-	            sprite_index = spr_player_ratattack
-	            fmod_studio_event_instance_oneshot_3d("event:/sfx/player/jump", x, y)
-	            particle_create(x, y, particles.genericpoof, xscale, 1, spr_jumpdust)
+		        punchtimer = 25
+		        Ghitwall = false
+		        state = states.ratmountattack
+		        if (p_move != 0)
+		            xscale = p_move
+		        movespeed = 12
+		        reset_anim(spr_player_finishingblow1)
 	        }
 	    }
 	}

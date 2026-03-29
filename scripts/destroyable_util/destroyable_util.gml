@@ -21,7 +21,8 @@ function break_destroyables()
 		states.swingding,
 		states.slip,
 		states.divebomb,
-		states.wallbounce
+		states.wallbounce,
+		states.ratmountattack
 	]
 	
 	var vertical_states = [
@@ -52,6 +53,9 @@ function break_destroyables()
 	}
 	
 	if sprite_index == obj_player.spr_player_machslidestart || sprite_index == obj_player.spr_player_machslideend
+		is_h_state = true
+	
+	if (state == states.normal || state == states.ratmountjump) && movespeed > 8
 		is_h_state = true
 	
 	if state == states.superjump && sprite_index == obj_player.spr_player_superjump

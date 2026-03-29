@@ -126,7 +126,7 @@
   "isEcma":false,
   "LibraryEmitters":[],
   "MetaData":{
-    "IDEVersion":"2024.14.3.217",
+    "IDEVersion":"2024.14.4.221",
   },
   "name":"BreakfastHotel",
   "resources":[
@@ -386,6 +386,7 @@
     {"id":{"name":"player_punchenemy","path":"scripts/player_punchenemy/player_punchenemy.yy",},},
     {"id":{"name":"player_punchstun","path":"scripts/player_punchstun/player_punchstun.yy",},},
     {"id":{"name":"player_ratmount","path":"scripts/player_ratmount/player_ratmount.yy",},},
+    {"id":{"name":"player_ratmountattack","path":"scripts/player_ratmountattack/player_ratmountattack.yy",},},
     {"id":{"name":"player_ratmountjump","path":"scripts/player_ratmountjump/player_ratmountjump.yy",},},
     {"id":{"name":"player_ratmountskid","path":"scripts/player_ratmountskid/player_ratmountskid.yy",},},
     {"id":{"name":"player_shotgunshoot","path":"scripts/player_shotgunshoot/player_shotgunshoot.yy",},},
